@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AURA — The Smart Cooling Mattress Cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#2f86c9; --brand-deep:#1F6FB2;
+    --cool-1:#6fd0ff; --cool-2:#2f9fe0;
+    --warm-1:#f6b97a; --warm-2:#e8804a;
+    --champ:#d8c08a;            /* premium accent */
+    --bg:#06080e; --bg-2:#0a0d16; --panel:#10131d; --panel-2:#0c0f18;
+    --text:#f3f5fa; --dim:#969eb2; --faint:#6a7184; --line:rgba(255,255,255,.085);
+    --maxw:1180px;
+    --serif:"Fraunces",Georgia,"Songti SC","Microsoft YaHei",serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .serif{font-family:var(--serif);font-weight:500;letter-spacing:-.015em}
+  .muted{color:var(--dim)}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--champ);
+    font-weight:600;margin-bottom:18px}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.02em;line-height:1.12}
+  .btn{display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;font-family:var(--sans);
+    font-weight:600;border-radius:6px;padding:15px 28px;font-size:14.5px;letter-spacing:.01em;
+    transition:.22s ease}
+  .btn-primary{background:var(--text);color:#0a0d16}
+  .btn-primary:hover{background:#fff;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.4)}
+  .reveal{opacity:0;transform:translateY(26px);transition:.9s cubic-bezier(.16,.8,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(16px) saturate(140%);
+    background:rgba(6,8,14,.6);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:var(--serif);font-weight:600;letter-spacing:.32em;font-size:22px;padding-left:.32em}
+  .nav-links{display:flex;gap:32px;font-size:13.5px;font-weight:500}
+  .nav-links a{color:var(--dim);transition:.2s} .nav-links a:hover{color:var(--text)}
+  .nav-right{display:flex;align-items:center;gap:16px}
+  .langsw{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .langsw button{background:transparent;border:0;color:var(--dim);font-family:var(--sans);font-size:11.5px;
+    font-weight:600;letter-spacing:.04em;padding:7px 9px;cursor:pointer;transition:.2s}
+  .langsw button:hover{color:var(--text)}
+  .langsw button.on{background:var(--text);color:#0a0d16}
+  @media(max-width:900px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:40px 0 30px}
+  .hero:before{content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(720px 520px at 78% 32%,rgba(47,134,201,.30),transparent 62%),
+      radial-gradient(620px 480px at 84% 60%,rgba(232,128,74,.13),transparent 60%)}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.04fr;gap:30px;align-items:center;min-height:74vh}
+  .hero-copy h1{font-size:clamp(38px,4.6vw,64px);margin-bottom:24px}
+  .hero-copy h1 em{font-style:italic;color:var(--champ)}
+  .hero-copy .sub{font-size:clamp(16px,1.4vw,18.5px);color:var(--dim);max-width:46ch;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .price-from{font-size:13px;color:var(--dim);margin-top:24px;letter-spacing:.02em}
+  .price-from b{color:var(--text);font-weight:600}
+  .hero-stage{position:relative;display:flex;justify-content:center}
+  .hero-stage:before{content:"";position:absolute;width:78%;height:78%;top:11%;left:11%;border-radius:50%;
+    background:radial-gradient(circle,rgba(47,134,201,.22),transparent 68%);filter:blur(10px)}
+  .hero-stage svg{width:100%;max-width:520px;height:auto;position:relative;
+    filter:drop-shadow(0 40px 70px rgba(0,0,0,.55))}
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;text-align:center;gap:10px;padding-top:10px}
+    .hero-copy .sub{margin-left:auto;margin-right:auto}.hero-cta{justify-content:center}
+    .hero-stage{order:-1}
+  }
+
+  /* marquee trust */
+  .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;
+    display:flex;gap:48px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--dim);font-weight:500}
+  .ticker b{color:var(--text);font-weight:600}
+  .ticker span{display:inline-flex;gap:9px;align-items:center}
+  .ticker .d{width:5px;height:5px;border-radius:50%;background:var(--champ)}
+
+  .sec{padding:104px 0}
+  .sec-head{max-width:64ch}
+  .sec-head.center{text-align:center;margin:0 auto}
+  .sec-head h2{font-size:clamp(28px,3.6vw,46px);margin-bottom:18px}
+  .sec-head p{color:var(--dim);font-size:17.5px;max-width:58ch}
+  .sec-head.center p{margin:0 auto}
+
+  /* ANATOMY */
+  .anat{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+  .anat-card{background:linear-gradient(165deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+    border-radius:18px;padding:34px 30px;text-align:center;transition:.3s}
+  .anat-card:hover{border-color:rgba(255,255,255,.22);transform:translateY(-4px)}
+  .anat-vis{height:180px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .anat-vis svg{height:170px;width:auto}
+  .anat-card .tag{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--champ);font-weight:600}
+  .anat-card h3{font-size:23px;margin:8px 0 10px}
+  .anat-card p{font-size:14px;color:var(--dim)}
+  @media(max-width:860px){.anat{grid-template-columns:1fr}}
+
+  /* PROBLEM */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .prob-list{display:flex;flex-direction:column;gap:4px}
+  .prob{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .prob .n{font-family:var(--serif);font-size:22px;color:var(--champ);min-width:38px}
+  .prob h3{font-size:18px;margin-bottom:3px;font-family:var(--sans);font-weight:600;letter-spacing:0}
+  .prob p{font-size:14px;color:var(--dim)}
+  @media(max-width:860px){.split{grid-template-columns:1fr;gap:34px}}
+
+  /* FEATURES */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:56px}
+  .feat{background:var(--bg-2);padding:40px 32px;transition:.3s;position:relative}
+  .feat:hover{background:var(--panel)}
+  .feat .ic{font-size:24px;margin-bottom:18px;opacity:.92}
+  .feat h3{font-size:20px;margin-bottom:10px}
+  .feat p{font-size:14px;color:var(--dim)}
+  .feat .badge{position:absolute;top:22px;right:22px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    font-weight:700;padding:4px 9px;border-radius:999px}
+  .badge.free{color:#1a1407;background:var(--champ)}
+  .badge.pro{color:var(--dim);background:rgba(255,255,255,.06);border:1px solid var(--line)}
+  @media(max-width:860px){.feat-grid{grid-template-columns:1fr}}
+
+  /* BAND (differentiator) */
+  .band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(47,134,201,.07),transparent 70%)}
+  .band-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+  .band h2{font-size:clamp(26px,3.2vw,40px);margin-bottom:18px}
+  .band h2 em{font-style:italic;color:var(--champ)}
+  .band p{color:var(--dim);font-size:16.5px;margin-bottom:14px}
+  .band .micro{font-size:13px;color:var(--faint)}
+  @media(max-width:860px){.band-grid{grid-template-columns:1fr;gap:34px}}
+
+  /* HOW */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:56px}
+  .step .num{font-family:var(--serif);font-size:42px;color:var(--champ);opacity:.55;line-height:1}
+  .step h3{font-size:19px;margin:14px 0 8px;font-family:var(--sans);font-weight:600;letter-spacing:0}
+  .step p{font-size:13.5px;color:var(--dim)}
+  .step{padding-top:22px;border-top:1px solid var(--line)}
+  @media(max-width:860px){.steps{grid-template-columns:1fr 1fr;gap:34px}}
+
+  /* COMPARE */
+  .cmp{background:linear-gradient(180deg,transparent,rgba(47,134,201,.05),transparent)}
+  table.compare{width:100%;border-collapse:collapse;margin-top:48px}
+  table.compare th,table.compare td{padding:20px 20px;text-align:center;border-bottom:1px solid var(--line);font-size:15px}
+  table.compare th{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--dim);font-weight:600;padding-bottom:16px}
+  table.compare td:first-child,table.compare th:first-child{text-align:left;color:var(--text)}
+  table.compare .us{background:rgba(47,134,201,.10)}
+  table.compare th.us{color:var(--text);font-family:var(--serif);font-size:18px;letter-spacing:.06em;text-transform:none}
+  table.compare th.them{font-family:var(--sans)}
+  .yes{color:#7fdcb0;font-weight:600}.no{color:#e88}.free{color:var(--champ);font-weight:600}
+  .cmp-tag{text-align:center;margin-top:34px;font-size:clamp(20px,2.4vw,30px)}
+  .cmp-tag .accent{color:var(--champ)}
+
+  /* APP showcase */
+  .gallery{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:56px;margin-bottom:18px}
+  .gallery figure{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .gallery svg{width:262px;height:auto;filter:drop-shadow(0 36px 60px rgba(0,0,0,.55))}
+  .gallery figcaption{font-size:12.5px;color:var(--dim);letter-spacing:.04em}
+  .plans{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+  .plan{border:1px solid var(--line);border-radius:16px;padding:28px 28px;background:var(--panel-2)}
+  .plan.free{border-color:rgba(216,192,138,.32)}
+  .plan h3{font-family:var(--sans);font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;margin-bottom:16px;font-weight:600}
+  .plan.free h3{color:var(--champ)} .plan.pro h3{color:var(--dim)}
+  .plan ul{list-style:none} .plan li{font-size:14px;color:var(--dim);padding:7px 0;padding-left:24px;position:relative}
+  .plan li:before{content:"";position:absolute;left:0;top:13px;width:11px;height:7px;
+    border-left:2px solid var(--champ);border-bottom:2px solid var(--champ);transform:rotate(-45deg)}
+  .plan.pro li:before{border-color:var(--dim)}
+  @media(max-width:760px){.plans{grid-template-columns:1fr}}
+
+  /* PRICING */
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:54px}
+  .tier{background:linear-gradient(168deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+    border-radius:16px;padding:30px 24px;display:flex;flex-direction:column;position:relative}
+  .tier.best{border-color:var(--champ)}
+  .tier .pop{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--champ);
+    color:#1a1407;font-size:10.5px;font-weight:700;letter-spacing:.12em;padding:5px 14px;border-radius:999px;white-space:nowrap}
+  .tier h3{font-family:var(--sans);font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--dim)}
+  .tier .price{font-family:var(--serif);font-size:38px;margin:10px 0 2px}
+  .tier .was{font-size:14px;color:var(--dim);text-decoration:line-through;margin-left:8px;font-family:var(--sans)}
+  .tier .save{font-size:12.5px;color:var(--champ);font-weight:600;margin-bottom:18px}
+  .tier ul{list-style:none;margin:6px 0 22px;flex:1}
+  .tier li{font-size:13px;color:var(--dim);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .tier .btn{width:100%;justify-content:center}
+  .pricing-note{text-align:center;color:var(--dim);font-size:13px;margin-top:22px}
+  @media(max-width:980px){.tiers{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.tiers{grid-template-columns:1fr}}
+
+  /* FAQ */
+  .faq{max-width:820px;margin:48px auto 0}
+  .qa{border-bottom:1px solid var(--line)}
+  .qa button{width:100%;text-align:left;background:transparent;border:0;color:var(--text);
+    padding:24px 4px;font-size:17px;font-family:var(--serif);font-weight:500;cursor:pointer;
+    display:flex;justify-content:space-between;gap:16px}
+  .qa .ans{max-height:0;overflow:hidden;transition:.35s ease;color:var(--dim);font-size:14.5px}
+  .qa .ans p{padding:0 4px 24px}
+  .qa.open .ans{max-height:280px}
+  .qa .chev{transition:.35s;color:var(--champ);font-family:var(--sans)}
+  .qa.open .chev{transform:rotate(45deg)}
+
+  /* CTA */
+  .cta{padding:120px 0;text-align:center;position:relative;overflow:hidden}
+  .cta:before{content:"";position:absolute;inset:0;z-index:-1;
+    background:radial-gradient(640px 360px at 50% 40%,rgba(47,134,201,.2),transparent 70%)}
+  .cta h2{font-size:clamp(30px,4.4vw,52px);max-width:16ch;margin:0 auto 18px}
+  .signup{display:flex;gap:10px;max-width:500px;margin:30px auto 0;flex-wrap:wrap;justify-content:center}
+  .signup input{flex:1;min-width:240px;background:var(--panel);border:1px solid var(--line);border-radius:6px;
+    padding:15px 20px;color:var(--text);font-size:15px;font-family:var(--sans)}
+  .signup input:focus{outline:none;border-color:var(--champ)}
+  .ok-msg{display:none;color:var(--champ);font-weight:600;margin-top:16px;width:100%}
+
+  footer{border-top:1px solid var(--line);padding:54px 0 40px}
+  .foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;color:var(--dim);font-size:13.5px}
+  .foot-links{display:flex;gap:24px;flex-wrap:wrap}
+  .foot-links a:hover{color:var(--text)}
+  .disclaimer{margin-top:26px;font-size:11.5px;color:#5b6373;max-width:96ch;line-height:1.6}
+
+  /* MOBILE POLISH */
+  @media(max-width:700px){
+    .wrap{padding:0 18px}
+    .btn{width:100%;justify-content:center;padding:13px 18px;font-size:14px}
+    .eyebrow{font-size:10.5px;letter-spacing:.2em;margin-bottom:12px}
+
+    .nav-in{height:58px}
+    .logo{font-size:18px;letter-spacing:.24em;padding-left:.24em}
+    .nav-right{gap:8px}
+    .nav-right > .btn{display:none}
+    .langsw button[data-l="es"],
+    .langsw button[data-l="fr"]{display:none}
+    .langsw button{font-size:10.5px;padding:6px 7px}
+
+    .hero{padding:14px 0 26px}
+    .hero:before{
+      background:
+        radial-gradient(420px 320px at 50% 24%,rgba(47,134,201,.26),transparent 66%),
+        radial-gradient(360px 300px at 74% 48%,rgba(232,128,74,.10),transparent 62%);
+    }
+    .hero-grid{min-height:auto;gap:0;padding-top:0}
+    .hero-stage{margin:-8px 0 -6px}
+    .hero-stage:before{width:68%;height:68%;top:16%;left:16%;filter:blur(8px)}
+    .hero-stage svg{max-width:min(82vw,310px);filter:drop-shadow(0 22px 38px rgba(0,0,0,.48))}
+    .hero-copy h1{font-size:clamp(30px,8.6vw,36px);line-height:1.08;margin:0 auto 16px;max-width:11.5ch;overflow-wrap:break-word}
+    .hero-copy .sub{font-size:15px;line-height:1.72;max-width:none;margin-bottom:24px}
+    .hero-cta{display:grid;grid-template-columns:1fr;gap:10px;max-width:320px;margin:0 auto}
+    .price-from{font-size:12px;line-height:1.55;margin-top:18px}
+
+    .ticker{justify-content:flex-start;gap:10px 0;padding:14px 18px;font-size:12px}
+    .ticker span{width:50%;gap:7px;line-height:1.35}
+
+    .sec{padding:66px 0}
+    .sec-head h2{font-size:clamp(27px,8vw,34px);margin-bottom:14px}
+    .sec-head p{font-size:15.5px;line-height:1.72}
+
+    .anat{gap:14px;margin-top:34px}
+    .anat-card{border-radius:14px;padding:24px 22px}
+    .anat-vis{height:132px;margin-bottom:14px}
+    .anat-vis svg{height:126px}
+    .anat-card h3{font-size:21px}
+
+    .split{gap:26px}
+    .prob{gap:14px;padding:17px 0}
+    .prob .n{font-size:20px;min-width:32px}
+    .prob h3{font-size:17px}
+
+    .feat-grid{margin-top:34px;border-radius:14px}
+    .feat{padding:28px 22px}
+    .feat .badge{top:18px;right:18px}
+
+    .band-grid{gap:26px}
+    .band .reveal[style]{justify-content:center!important}
+    .band svg{width:min(78vw,280px);height:auto}
+
+    .steps{grid-template-columns:1fr;gap:22px;margin-top:34px}
+    .step{padding-top:18px}
+    .step .num{font-size:36px}
+
+    .cmp .wrap > .reveal{overflow-x:auto;margin:0 -18px;padding:0 18px;-webkit-overflow-scrolling:touch}
+    table.compare{min-width:590px;margin-top:34px}
+    table.compare th,table.compare td{padding:14px 12px;font-size:13px}
+    table.compare th{font-size:10.5px;letter-spacing:.11em}
+    table.compare th.us{font-size:16px}
+    .cmp-tag{font-size:22px;line-height:1.25;margin-top:28px}
+
+    .gallery{gap:22px;margin-top:36px}
+    .gallery svg{width:min(76vw,252px);filter:drop-shadow(0 24px 42px rgba(0,0,0,.50))}
+    .gallery figcaption{text-align:center;max-width:28ch;line-height:1.45}
+    .plans{gap:14px;margin-top:30px}
+    .plan{border-radius:14px;padding:22px}
+
+    .tiers{gap:14px;margin-top:36px}
+    .tier{border-radius:14px;padding:26px 22px}
+    .tier .price{font-size:34px}
+
+    .faq{margin-top:32px}
+    .qa button{font-size:15.5px;line-height:1.45;padding:20px 0}
+    .qa .ans{font-size:14px}
+    .qa .ans p{padding:0 0 20px}
+
+    .cta{padding:78px 0}
+    .cta h2{font-size:clamp(29px,8.8vw,38px);max-width:12ch}
+    .signup{display:grid;grid-template-columns:1fr;max-width:340px;margin-top:24px}
+    .signup input{width:100%;min-width:0;padding:14px 16px}
+
+    footer{padding:40px 0 32px}
+    .foot-in{gap:18px}
+    .foot-links{gap:16px 20px}
+  }
+
+  @media(max-width:380px){
+    .wrap{padding:0 16px}
+    .logo{font-size:17px}
+    .langsw button{font-size:10px;padding:6px 5px}
+    .ticker span{width:100%}
+    .hero-copy h1{font-size:31px}
+    .hero-stage svg{max-width:84vw}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="logo">AURA</div>
+    <div class="nav-links">
+      <a href="#anatomy" data-en="The product" data-zh="产品">The product</a>
+      <a href="#app" data-en="The app" data-zh="App">The app</a>
+      <a href="#compare" data-en="vs Eight Sleep" data-zh="对比">vs Eight Sleep</a>
+      <a href="#pricing" data-en="Pricing" data-zh="价格">Pricing</a>
+      <a href="#faq" data-en="FAQ" data-zh="常见问题">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <div class="langsw" id="langSw">
+        <button data-l="en">EN</button>
+        <button data-l="zh" class="on">中文</button>
+        <button data-l="es">ES</button>
+        <button data-l="fr">FR</button>
+      </div>
+      <a href="#pricing" class="btn btn-primary" style="padding:11px 20px" data-en="Reserve" data-zh="预订">Reserve</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <div class="eyebrow" data-en="Smart cooling mattress cover" data-zh="智能温控床罩">Smart cooling mattress cover</div>
+      <h1 class="serif" data-en-html="Flagship sleep. <em>Half the price.</em> No monthly fee, ever." data-zh-html="旗舰睡眠，<em>半价之选，</em>永无月费。">Flagship sleep. <em>Half the price.</em> No monthly fee, ever.</h1>
+      <p class="sub" data-en="A cover that zips onto your mattress and actively cools or warms each side — 55°F to 110°F — while tracking your sleep score, stages, heart rate and body clock without touching you. Core features free for life." data-zh="一张轻覆于床垫之上的智能床罩，左右分区主动控温（13–43°C），并于无形之中记录你的睡眠评分、分期、心率与生物钟。核心功能，终身免费。">A cover that zips onto your mattress and actively cools or warms each side — 55°F to 110°F — while tracking your sleep score, stages, heart rate and body clock without touching you. Core features free for life.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary" data-en="Reserve — save up to $600" data-zh="立即预订，至高省 $600">Reserve — save up to $600</a>
+        <a href="#app" class="btn btn-ghost" data-en="See the app" data-zh="看看 App">See the app</a>
+      </div>
+      <div class="price-from" data-en-html="Crowdfunding from <b>$899</b> · ships in standard US sizes · 30 dB quiet" data-zh-html="众筹预售 <b>$899</b> 起 · 适配美标各尺寸 · 30 分贝静谧">Crowdfunding from <b>$899</b> · ships in standard US sizes · 30 dB quiet</div>
+    </div>
+    <div class="hero-stage reveal">
+      <!-- PRODUCT: top-down smart cover with dual zones + bedside hub -->
+      <svg viewBox="0 0 560 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Smart cooling mattress cover">
+        <defs>
+          <linearGradient id="cool" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1b3550"/><stop offset="1" stop-color="#11202f"/>
+          </linearGradient>
+          <linearGradient id="warm" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3a2a1f" stop-opacity=".95"/><stop offset="1" stop-color="#241a13"/>
+          </linearGradient>
+          <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#252a35"/><stop offset=".5" stop-color="#171b24"/><stop offset="1" stop-color="#0e1117"/>
+          </linearGradient>
+          <radialGradient id="coolGlow" cx="50%" cy="35%" r="60%">
+            <stop offset="0" stop-color="#6fd0ff" stop-opacity=".5"/><stop offset="1" stop-color="#6fd0ff" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="warmGlow" cx="50%" cy="35%" r="60%">
+            <stop offset="0" stop-color="#f6b97a" stop-opacity=".42"/><stop offset="1" stop-color="#f6b97a" stop-opacity="0"/>
+          </radialGradient>
+          <clipPath id="coverClip"><rect x="80" y="100" width="400" height="440" rx="36"/></clipPath>
+        </defs>
+        <ellipse cx="280" cy="548" rx="225" ry="30" fill="#000" opacity=".45"/>
+        <ellipse cx="280" cy="664" rx="120" ry="20" fill="#000" opacity=".4"/>
+        <rect x="80" y="112" width="400" height="440" rx="36" fill="#0a0d14"/>
+        <rect x="80" y="100" width="400" height="440" rx="36" fill="#0f1623" stroke="rgba(255,255,255,.10)"/>
+        <g clip-path="url(#coverClip)">
+          <rect x="80" y="100" width="200" height="440" fill="url(#cool)"/>
+          <rect x="280" y="100" width="200" height="440" fill="url(#warm)"/>
+          <rect x="80" y="100" width="200" height="440" fill="url(#coolGlow)"/>
+          <rect x="280" y="100" width="200" height="440" fill="url(#warmGlow)"/>
+          <g stroke="rgba(255,255,255,.05)" stroke-width="1">
+            <line x1="80" y1="240" x2="480" y2="240"/><line x1="80" y1="300" x2="480" y2="300"/>
+            <line x1="80" y1="360" x2="480" y2="360"/><line x1="80" y1="420" x2="480" y2="420"/>
+            <line x1="80" y1="480" x2="480" y2="480"/>
+            <line x1="140" y1="220" x2="140" y2="540"/><line x1="200" y1="220" x2="200" y2="540"/>
+            <line x1="360" y1="220" x2="360" y2="540"/><line x1="420" y1="220" x2="420" y2="540"/>
+          </g>
+          <path d="M110,250 H252 V280 H110 V310 H252 V340 H110 V370 H252 V400 H110 V430 H252 V460 H110 V490 H252"
+            fill="none" stroke="#6fd0ff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" opacity=".55"/>
+          <path d="M450,250 H308 V280 H450 V310 H308 V340 H450 V370 H308 V400 H450 V430 H308 V460 H450 V490 H308"
+            fill="none" stroke="#f6b97a" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" opacity=".5"/>
+          <rect x="108" y="120" width="150" height="78" rx="20" fill="#141b29" stroke="rgba(255,255,255,.08)"/>
+          <rect x="302" y="120" width="150" height="78" rx="20" fill="#1c1812" stroke="rgba(255,255,255,.07)"/>
+          <line x1="280" y1="120" x2="280" y2="540" stroke="rgba(255,255,255,.16)" stroke-width="1.5" stroke-dasharray="1 6"/>
+          <rect x="96" y="116" width="368" height="408" rx="28" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.2" stroke-dasharray="2 6"/>
+        </g>
+        <g>
+          <rect x="128" y="300" width="104" height="56" rx="16" fill="rgba(10,16,26,.82)" stroke="#6fd0ff" stroke-opacity=".55"/>
+          <text x="180" y="330" text-anchor="middle" font-family="Inter,sans-serif" font-size="26" font-weight="700" fill="#cfeeff">62°F</text>
+          <text x="180" y="346" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#7fb8d8" letter-spacing="1">COOLING</text>
+        </g>
+        <g>
+          <rect x="328" y="300" width="104" height="56" rx="16" fill="rgba(18,12,8,.82)" stroke="#f6b97a" stroke-opacity=".5"/>
+          <text x="380" y="330" text-anchor="middle" font-family="Inter,sans-serif" font-size="26" font-weight="700" fill="#ffe2c2">78°F</text>
+          <text x="380" y="346" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#d8a878" letter-spacing="1">WARMING</text>
+        </g>
+        <path d="M250,540 C250,575 250,575 250,600" stroke="#2b3340" stroke-width="6" fill="none"/>
+        <path d="M310,540 C310,575 310,575 310,600" stroke="#2b3340" stroke-width="6" fill="none"/>
+        <rect x="196" y="598" width="168" height="86" rx="18" fill="url(#metal)" stroke="rgba(255,255,255,.10)"/>
+        <rect x="196" y="598" width="168" height="30" rx="18" fill="#ffffff" opacity=".04"/>
+        <circle cx="238" cy="641" r="26" fill="#0b0f17" stroke="rgba(111,208,255,.5)" stroke-width="1.5"/>
+        <text x="238" y="647" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#cfeeff">62°</text>
+        <circle cx="322" cy="641" r="26" fill="#0b0f17" stroke="rgba(246,185,122,.5)" stroke-width="1.5"/>
+        <text x="322" y="647" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#ffe2c2">78°</text>
+        <text x="280" y="613" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="#7c8699" letter-spacing="3">AURA HUB</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="ticker reveal">
+  <span><i class="d"></i><b data-en="Dual-zone 55–110°F" data-zh="左右双区控温">Dual-zone 55–110°F</b></span>
+  <span><i class="d"></i><b data-en="Body-clock thermal sync" data-zh="生物钟温控联动">Body-clock thermal sync</b></span>
+  <span><i class="d"></i><b data-en="≤30 dB whisper-quiet" data-zh="≤30 分贝静谧">≤30 dB whisper-quiet</b></span>
+  <span><i class="d"></i><b data-en="No subscription, ever" data-zh="永无月费">No subscription, ever</b></span>
+</div>
+
+<!-- ANATOMY / WHAT IT IS -->
+<section class="sec" id="anatomy">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow" data-en="What you get" data-zh="产品组成">What you get</div>
+      <h2 class="serif" data-en="A cover, a hub, and an app — working as one." data-zh="床罩、主机、App，浑然一体。">A cover, a hub, and an app — working as one.</h2>
+      <p data-en="No new mattress required. The cover zips over the one you own; the bedside hub circulates temperature-controlled water and reads your sleep; the app puts it all in your hand — in English or 中文." data-zh="无需更换床垫。床罩轻覆于现有床垫之上；床头主机静驱控温水流、同步感知睡眠；尽在 App 掌握之中——中英双语随心切换。">No new mattress required. The cover zips over the one you own; the bedside hub circulates temperature-controlled water and reads your sleep; the app puts it all in your hand — in English or 中文.</p>
+    </div>
+    <div class="anat">
+      <div class="anat-card reveal">
+        <div class="anat-vis">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="cover">
+            <rect x="24" y="34" width="152" height="132" rx="18" fill="#0f1623" stroke="rgba(255,255,255,.1)"/>
+            <rect x="24" y="34" width="76" height="132" rx="18" fill="#15293c"/>
+            <rect x="100" y="34" width="76" height="132" rx="18" fill="#2c2117"/>
+            <line x1="100" y1="40" x2="100" y2="160" stroke="rgba(255,255,255,.18)" stroke-dasharray="1 5"/>
+            <path d="M40,70 H88 V88 H40 V106 H88 V124 H40 V142 H88" fill="none" stroke="#6fd0ff" stroke-width="2" opacity=".6" stroke-linejoin="round"/>
+            <path d="M160,70 H112 V88 H160 V106 H112 V124 H160 V142 H112" fill="none" stroke="#f6b97a" stroke-width="2" opacity=".55" stroke-linejoin="round"/>
+            <rect x="32" y="44" width="136" height="112" rx="12" fill="none" stroke="rgba(255,255,255,.12)" stroke-dasharray="2 5"/>
+          </svg>
+        </div>
+        <div class="tag" data-en="01 · The Cover" data-zh="01 · 床罩">01 · The Cover</div>
+        <h3 class="serif" data-en="Zips onto any mattress" data-zh="轻覆之上，适配任意床垫">Zips onto any mattress</h3>
+        <p data-en="Quilted, breathable cover with independent left/right water channels. Fits standard US sizes." data-zh="亲肤透气绗缝，左右水路独立控温，适配美标各尺寸。">Quilted, breathable cover with independent left/right water channels. Fits standard US sizes.</p>
+      </div>
+      <div class="anat-card reveal">
+        <div class="anat-vis">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="hub">
+            <ellipse cx="100" cy="176" rx="62" ry="10" fill="#000" opacity=".4"/>
+            <rect x="58" y="36" width="84" height="140" rx="22" fill="url(#metal)" stroke="rgba(255,255,255,.1)"/>
+            <rect x="58" y="36" width="84" height="40" rx="22" fill="#fff" opacity=".05"/>
+            <circle cx="100" cy="92" r="30" fill="#0b0f17" stroke="rgba(111,208,255,.55)" stroke-width="2"/>
+            <circle cx="100" cy="92" r="30" fill="none" stroke="#6fd0ff" stroke-width="3" stroke-dasharray="120 70" stroke-linecap="round" opacity=".8" transform="rotate(-90 100 92)"/>
+            <text x="100" y="98" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="700" fill="#cfeeff">62°</text>
+            <rect x="78" y="138" width="44" height="6" rx="3" fill="#2c3543"/>
+            <circle cx="100" cy="156" r="6" fill="#1a2230" stroke="rgba(255,255,255,.12)"/>
+          </svg>
+        </div>
+        <div class="tag" data-en="02 · The Hub" data-zh="02 · 床头主机">02 · The Hub</div>
+        <h3 class="serif" data-en="Quiet bedside engine" data-zh="静谧床头主机">Quiet bedside engine</h3>
+        <p data-en="Circulates temperature-controlled water and senses heart rate, HRV and breathing — at ≤30 dB." data-zh="静驱控温水循环，同步感知心率、HRV 与呼吸，运行噪音 ≤30 分贝。">Circulates temperature-controlled water and senses heart rate, HRV and breathing — at ≤30 dB.</p>
+      </div>
+      <div class="anat-card reveal">
+        <div class="anat-vis">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="app">
+            <rect x="64" y="22" width="72" height="156" rx="16" fill="#0d111b" stroke="rgba(255,255,255,.12)"/>
+            <rect x="72" y="34" width="56" height="132" rx="8" fill="#0a0e16"/>
+            <circle cx="100" cy="78" r="26" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="6"/>
+            <circle cx="100" cy="78" r="26" fill="none" stroke="#6fd0ff" stroke-width="6" stroke-dasharray="150 50" stroke-linecap="round" transform="rotate(-90 100 78)"/>
+            <text x="100" y="84" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#eaf2ff">91</text>
+            <rect x="80" y="118" width="40" height="5" rx="2.5" fill="#6fd0ff" opacity=".8"/>
+            <rect x="80" y="130" width="40" height="5" rx="2.5" fill="#2f9fe0" opacity=".6"/>
+            <rect x="80" y="142" width="40" height="5" rx="2.5" fill="#2f9fe0" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="tag" data-en="03 · The App" data-zh="03 · App">03 · The App</div>
+        <h3 class="serif" data-en="Your sleep, every morning" data-zh="每日醒来，洞悉睡眠">Your sleep, every morning</h3>
+        <p data-en="Score with a 7-factor breakdown, heart rate, HRV, sleep debt and body clock — free forever. Optional AI on top." data-zh="睡眠评分与 7 项构成拆解、心率、HRV、睡眠负债与生物钟，尽收眼底——永久免费；AI 按需叠加。">Score with a 7-factor breakdown, heart rate, HRV, sleep debt and body clock — free forever. Optional AI on top.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="sec" id="problem" style="background:var(--bg-2)">
+  <div class="wrap split">
+    <div class="sec-head reveal">
+      <div class="eyebrow" data-en="The problem" data-zh="痛点">The problem</div>
+      <h2 class="serif" data-en="Temperature is the #1 controllable factor in sleep." data-zh="温度，是睡眠质量最关键、也最可掌控的变量。">Temperature is the #1 controllable factor in sleep.</h2>
+      <p data-en="Yet most of us still fight it with a thermostat, a fan, and kicking off the blanket — while the one product that truly fixes it costs a fortune and locks the best parts behind a subscription." data-zh="可大多数人至今仍以空调、风扇与一床薄被勉力周旋——唯一能真正解决的产品，却价格高企，更将最精华的功能尽数锁入月费之中。">Yet most of us still fight it with a thermostat, a fan, and kicking off the blanket — while the one product that truly fixes it costs a fortune and locks the best parts behind a subscription.</p>
+    </div>
+    <div class="prob-list reveal">
+      <div class="prob"><div class="n serif">01</div><div><h3 data-en="Hot, sweaty 3 a.m. wake-ups" data-zh="午夜燥热，汗湿而醒">Hot, sweaty 3 a.m. wake-ups</h3><p data-en="Night-time thermoregulation goes out of balance." data-zh="入睡后体温调节失衡，愈睡愈热。">Night-time thermoregulation goes out of balance.</p></div></div>
+      <div class="prob"><div class="n serif">02</div><div><h3 data-en="Two people, one temperature" data-zh="同床共枕，冷暖难两全">Two people, one temperature</h3><p data-en="One runs hot, the other cold — same blanket, different needs." data-zh="你倍感燥热，他却觉寒凉；一床两感，总有一方在迁就。">One runs hot, the other cold — same blanket, different needs.</p></div></div>
+      <div class="prob"><div class="n serif">03</div><div><h3 data-en="Subscription fatigue" data-zh="订阅之累">Subscription fatigue</h3><p data-en="Buy the hardware, then keep paying monthly to use what you own." data-zh="硬件早已买断，欲享全部功能，仍须按月续费。">Buy the hardware, then keep paying monthly to use what you own.</p></div></div>
+      <div class="prob"><div class="n serif">04</div><div><h3 data-en="A $2,000–$3,000 price wall" data-zh="$2,000–$3,000 的高价之墙">A $2,000–$3,000 price wall</h3><p data-en="Flagship sleep tech is priced out of reach for most." data-zh="旗舰级睡眠科技，将多数人拒之门外。">Flagship sleep tech is priced out of reach for most.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec" id="features">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow" data-en="Why you'll love it" data-zh="核心卖点">Why you'll love it</div>
+      <h2 class="serif" data-en="The same science, rethought around you." data-zh="同样的科学，只为你重新雕琢。">The same science, rethought around you.</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal"><div class="ic">🌡️</div><h3 class="serif" data-en="True dual-zone control" data-zh="左右分区，独立控温">True dual-zone control</h3><p data-en="Cool your side to a crisp 55°F while your partner stays a cozy 110°F — independently, all night." data-zh="你这侧清凉至 13°C，伴侣那侧温暖达 43°C，各随其意，整夜互不相扰。">Cool your side to a crisp 55°F while your partner stays a cozy 110°F — independently, all night.</p></div>
+      <div class="feat reveal"><div class="ic">🛰️</div><h3 class="serif" data-en="Contact-free tracking" data-zh="无感睡眠监测">Contact-free tracking</h3><p data-en="Heart rate, HRV, sleep stages and snoring — measured with nothing on your body." data-zh="心率、HRV、睡眠分期与鼾声，全程记录，身无所系。">Heart rate, HRV, sleep stages and snoring — measured with nothing on your body.</p></div>
+      <div class="feat reveal"><div class="ic">∞</div><h3 class="serif" data-en="No subscription, ever" data-zh="永无月费之忧">No subscription, ever</h3><p data-en="Temperature control and sleep tracking are free for the life of the product. AI is optional — and buyable outright." data-zh="温控与睡眠监测，终身免费；AI 功能按需选配，亦可一次买断。">Temperature control and sleep tracking are free for the life of the product. AI is optional — and buyable outright.</p></div>
+      <div class="feat reveal"><div class="ic">🌙</div><h3 class="serif" data-en="Whisper-quiet" data-zh="静谧如耳语">Whisper-quiet</h3><p data-en="The bedside hub runs at ≤30 dB — quieter than a library." data-zh="床头主机运行 ≤30 分贝，静于图书馆。">The bedside hub runs at ≤30 dB — quieter than a library.</p></div>
+      <div class="feat reveal"><div class="ic">🛡️</div><h3 class="serif" data-en="Leak-safe by design" data-zh="周密防漏设计">Leak-safe by design</h3><p data-en="Double-sealed water channels with leak-detection auto-shutoff." data-zh="水路双重密封，一旦渗漏，即时侦测、自动断电。">Double-sealed water channels with leak-detection auto-shutoff.</p></div>
+      <div class="feat reveal"><div class="ic">🧭</div><h3 class="serif" data-en="Body-clock thermal sync" data-zh="生物钟温控联动">Body-clock thermal sync</h3><p data-en="The app reads your circadian rhythm and auto-aligns tonight's cooling and warm-up to it — only on a cover that can act." data-zh="App 读懂你的生物钟，自动据此对齐今晚的预冷与升温——唯有能行动的床罩，才办得到。">The app reads your circadian rhythm and auto-aligns tonight's cooling and warm-up to it — only on a cover that can act.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND: differentiator -->
+<section class="sec band" id="bodyclock">
+  <div class="wrap band-grid">
+    <div class="reveal">
+      <div class="eyebrow" data-en="The difference" data-zh="差异所在">The difference</div>
+      <h2 class="serif" data-en-html="Most trackers advise. <em>A cover can act.</em>" data-zh-html="多数设备只会建议，<em>而床罩能行动。</em>">Most trackers advise. <em>A cover can act.</em></h2>
+      <p data-en="The app shows your 24-hour body clock — whether you're drifting earlier or later than your ideal window. Then, with one tap (or automatically on Premium), it aligns tonight's pre-cool, deep-sleep dip and gradual warm-up wake to your rhythm." data-zh="App 会展示你的 24 小时生物钟——你比理想作息提前还是推后，一目了然。随后只需一键（高级版可全自动），它便据此对齐今晚的睡前预冷、深睡降温与渐进升温唤醒。">The app shows your 24-hour body clock — whether you're drifting earlier or later than your ideal window. Then, with one tap (or automatically on Premium), it aligns tonight's pre-cool, deep-sleep dip and gradual warm-up wake to your rhythm.</p>
+      <p class="micro" data-en="Advice you can actually sleep on — because the cover, not just the chart, does something about it." data-zh="建议不止于纸上——因为真正行动的，是床罩本身，而非一张图表。">Advice you can actually sleep on — because the cover, not just the chart, does something about it.</p>
+    </div>
+    <div class="reveal" style="display:flex;justify-content:center">
+      <!-- 24h body-clock ring -->
+      <svg viewBox="0 0 300 300" width="320" height="320" xmlns="http://www.w3.org/2000/svg" aria-label="24-hour body clock">
+        <circle cx="150" cy="150" r="108" fill="none" stroke="#141a28" stroke-width="16"/>
+        <!-- ideal window arc (dim) ~23:00->07:00 -->
+        <path d="M 150 42 A 108 108 0 0 1 150 258" fill="none" stroke="#3a6ea5" stroke-opacity=".45" stroke-width="16" stroke-linecap="round" transform="rotate(165 150 150)"/>
+        <!-- actual sleep arc (bright) -->
+        <path d="M 150 43 A 107 107 0 0 1 150 257" fill="none" stroke="#52c7b8" stroke-width="9" stroke-linecap="round" transform="rotate(177 150 150)"/>
+        <!-- schedule markers -->
+        <circle cx="150" cy="42" r="6.5" fill="#fff" transform="rotate(165 150 150)"/>
+        <circle cx="150" cy="42" r="6.5" fill="#fff" transform="rotate(285 150 150)"/>
+        <circle cx="150" cy="42" r="5" fill="#5bb8ff" stroke="#06080e" stroke-width="1.5" transform="rotate(157 150 150)"/>
+        <circle cx="150" cy="42" r="5" fill="#7d97f4" stroke="#06080e" stroke-width="1.5" transform="rotate(210 150 150)"/>
+        <circle cx="150" cy="42" r="5" fill="#f6b97a" stroke="#06080e" stroke-width="1.5" transform="rotate(280 150 150)"/>
+        <text x="150" y="30" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6a7184">12 AM</text>
+        <text x="276" y="154" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6a7184">6 AM</text>
+        <text x="150" y="284" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6a7184">12 PM</text>
+        <text x="24" y="154" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6a7184">6 PM</text>
+        <text x="150" y="146" text-anchor="middle" font-family="Fraunces,serif" font-size="20" fill="#f3f5fa">Early 55m</text>
+        <text x="150" y="168" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#969eb2" letter-spacing="1">VS IDEAL MIDPOINT</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- APP showcase -->
+<section class="sec" id="app">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow" data-en="Inside the app" data-zh="App 内部">Inside the app</div>
+      <h2 class="serif" data-en="A full sleep lab in your pocket — most of it free." data-zh="口袋里的睡眠实验室——大部分，免费。">A full sleep lab in your pocket — most of it free.</h2>
+      <p data-en="Not a teaser screen. Real temperature control, a deeply broken-down sleep report, trends, a calendar, and a body clock that drives the cover." data-zh="并非样子货：真实的温控、层层拆解的睡眠报告、长期趋势、回顾日历，以及一个真正驱动床罩的生物钟。">Not a teaser screen. Real temperature control, a deeply broken-down sleep report, trends, a calendar, and a body clock that drives the cover.</p>
+    </div>
+
+    <!-- two phone mockups -->
+    <div class="gallery reveal">
+      <!-- SLEEP REPORT -->
+      <figure>
+        <svg viewBox="0 0 280 580" xmlns="http://www.w3.org/2000/svg" aria-label="Sleep report screen">
+          <rect x="20" y="14" width="240" height="552" rx="38" fill="#0d111b" stroke="rgba(255,255,255,.12)"/>
+          <rect x="30" y="26" width="220" height="528" rx="30" fill="#0a0e16"/>
+          <rect x="116" y="36" width="48" height="7" rx="3.5" fill="#1a2130"/>
+          <text x="46" y="84" font-family="Fraunces,serif" font-size="19" fill="#f3f5fa">Sleep Report</text>
+          <!-- score ring -->
+          <circle cx="86" cy="150" r="40" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="9"/>
+          <circle cx="86" cy="150" r="40" fill="none" stroke="#52c7b8" stroke-width="9" stroke-linecap="round" stroke-dasharray="228 251" transform="rotate(-90 86 150)"/>
+          <text x="86" y="156" text-anchor="middle" font-family="Inter,sans-serif" font-size="30" font-weight="700" fill="#f3f5fa">91</text>
+          <text x="150" y="138" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#f3f5fa">Stellar sleep</text>
+          <text x="150" y="156" font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">7h 45m · deep 26%</text>
+          <text x="150" y="170" font-family="Inter,sans-serif" font-size="9.5" fill="#d8c08a">👑 best of the week</text>
+          <!-- contributors -->
+          <g font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">
+            <text x="46" y="214">Total sleep</text><text x="234" y="214" text-anchor="end" fill="#f3f5fa">good</text>
+            <rect x="46" y="220" width="188" height="5" rx="2.5" fill="rgba(255,255,255,.07)"/><rect x="46" y="220" width="166" height="5" rx="2.5" fill="#52c7b8"/>
+            <text x="46" y="246">Deep sleep</text><text x="234" y="246" text-anchor="end" fill="#f3f5fa">26%</text>
+            <rect x="46" y="252" width="188" height="5" rx="2.5" fill="rgba(255,255,255,.07)"/><rect x="46" y="252" width="120" height="5" rx="2.5" fill="#7d97f4"/>
+            <text x="46" y="278">HRV recovery</text><text x="234" y="278" text-anchor="end" fill="#f3f5fa">88</text>
+            <rect x="46" y="284" width="188" height="5" rx="2.5" fill="rgba(255,255,255,.07)"/><rect x="46" y="284" width="160" height="5" rx="2.5" fill="#52c7b8"/>
+            <text x="46" y="310">Snore impact</text><text x="234" y="310" text-anchor="end" fill="#e3c06c">watch</text>
+            <rect x="46" y="316" width="188" height="5" rx="2.5" fill="rgba(255,255,255,.07)"/><rect x="46" y="316" width="92" height="5" rx="2.5" fill="#e3c06c"/>
+          </g>
+          <!-- debt + bodyclock chips -->
+          <rect x="46" y="338" width="90" height="46" rx="12" fill="#11182a"/>
+          <text x="56" y="358" font-family="Inter,sans-serif" font-size="9" fill="#969eb2">Sleep debt</text>
+          <text x="56" y="375" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#62c79c">0m</text>
+          <rect x="144" y="338" width="90" height="46" rx="12" fill="#11182a"/>
+          <text x="154" y="358" font-family="Inter,sans-serif" font-size="9" fill="#969eb2">Body clock</text>
+          <text x="154" y="375" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#f3f5fa">Early 55m</text>
+          <!-- hypnogram -->
+          <text x="46" y="412" font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">Overnight stages</text>
+          <polyline points="46,432 70,432 70,460 110,460 110,420 150,420 150,460 190,460 190,440 234,440"
+            fill="none" stroke="url(#cool)" stroke-width="2.6" stroke-linejoin="round"/>
+          <polyline points="46,432 70,432 70,460 110,460 110,420 150,420 150,460 190,460 190,440 234,440"
+            fill="none" stroke="#52c7b8" stroke-width="2.6" stroke-linejoin="round" opacity=".9"/>
+          <!-- HR curve -->
+          <text x="46" y="492" font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">Lowest heart rate · 52 bpm</text>
+          <polyline points="46,524 70,518 94,512 118,506 142,508 166,514 190,520 214,524 234,520"
+            fill="none" stroke="#7d97f4" stroke-width="2" stroke-linejoin="round" opacity=".85"/>
+        </svg>
+        <figcaption data-en="Sleep — score, 7 contributors, debt, body clock" data-zh="睡眠 — 评分、7 项构成、负债、生物钟">Sleep — score, 7 contributors, debt, body clock</figcaption>
+      </figure>
+
+      <!-- HOME / TEMP -->
+      <figure>
+        <svg viewBox="0 0 280 580" xmlns="http://www.w3.org/2000/svg" aria-label="Temperature control screen">
+          <rect x="20" y="14" width="240" height="552" rx="38" fill="#0d111b" stroke="rgba(255,255,255,.12)"/>
+          <rect x="30" y="26" width="220" height="528" rx="30" fill="#0a0e16"/>
+          <rect x="116" y="36" width="48" height="7" rx="3.5" fill="#1a2130"/>
+          <text x="46" y="80" font-family="Fraunces,serif" font-size="18" fill="#f3f5fa">Good evening</text>
+          <text x="46" y="98" font-family="Inter,sans-serif" font-size="10" fill="#969eb2">Cover ready · Autopilot on</text>
+          <!-- two dials -->
+          <g>
+            <circle cx="92" cy="178" r="44" fill="none" stroke="#16203a" stroke-width="11"/>
+            <circle cx="92" cy="178" r="44" fill="none" stroke="#5bb8ff" stroke-width="11" stroke-linecap="round" stroke-dasharray="150 127" transform="rotate(-90 92 178)"/>
+            <text x="92" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" font-weight="800" fill="#f3f5fa">66°</text>
+            <text x="92" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#969eb2">My side</text>
+          </g>
+          <g>
+            <circle cx="188" cy="178" r="44" fill="none" stroke="#241a13" stroke-width="11"/>
+            <circle cx="188" cy="178" r="44" fill="none" stroke="#f6b97a" stroke-width="11" stroke-linecap="round" stroke-dasharray="205 72" transform="rotate(-90 188 178)"/>
+            <text x="188" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" font-weight="800" fill="#f3f5fa">74°</text>
+            <text x="188" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#969eb2">Partner</text>
+          </g>
+          <!-- presets -->
+          <rect x="46" y="258" width="58" height="50" rx="12" fill="#11182a"/>
+          <rect x="111" y="258" width="58" height="50" rx="12" fill="#11182a"/>
+          <rect x="176" y="258" width="58" height="50" rx="12" fill="#11182a"/>
+          <text x="75" y="288" text-anchor="middle" font-size="15">❄️</text><text x="75" y="302" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#969eb2">Cool</text>
+          <text x="140" y="288" text-anchor="middle" font-size="15">🌤</text><text x="140" y="302" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#969eb2">Neutral</text>
+          <text x="205" y="288" text-anchor="middle" font-size="15">🔥</text><text x="205" y="302" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#969eb2">Cozy</text>
+          <!-- schedule -->
+          <rect x="46" y="324" width="188" height="120" rx="14" fill="#11182a"/>
+          <text x="58" y="346" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#f3f5fa">Tonight's schedule</text>
+          <text x="58" y="372" font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">22:30 Pre-cool</text><text x="222" y="372" text-anchor="end" font-family="Inter,sans-serif" font-size="9.5" fill="#cfd6e6">64° / 72°</text>
+          <text x="58" y="396" font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">02:00 Deep-sleep dip</text><text x="222" y="396" text-anchor="end" font-family="Inter,sans-serif" font-size="9.5" fill="#cfd6e6">62° / 70°</text>
+          <text x="58" y="420" font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">06:45 Warm-up wake</text><text x="222" y="420" text-anchor="end" font-family="Inter,sans-serif" font-size="9.5" fill="#cfd6e6">75° / 78°</text>
+          <!-- bedroom now -->
+          <text x="46" y="476" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#f3f5fa">Bedroom now</text>
+          <text x="46" y="500" font-family="Inter,sans-serif" font-size="9.5" fill="#969eb2">Room 72° · Humidity 49% · Bed 66°</text>
+        </svg>
+        <figcaption data-en="Climate — dual dials, presets, editable schedule" data-zh="温控 — 双区盘、快速预设、可编辑日程">Climate — dual dials, presets, editable schedule</figcaption>
+      </figure>
+    </div>
+
+    <!-- capability cards with FREE/PRO badge -->
+    <div class="feat-grid reveal">
+      <div class="feat"><span class="badge free" data-en="Free" data-zh="免费">Free</span><div class="ic">🌡️</div><h3 class="serif" data-en="Dual-zone control & schedules" data-zh="双区温控与日程">Dual-zone control & schedules</h3><p data-en="Per-side dials, one-tap presets, and a fully editable nightly schedule with custom step names — synced to the cloud." data-zh="左右独立温控盘、一键预设，以及可完全自定义命名的整夜日程——全程云端同步。">Per-side dials, one-tap presets, and a fully editable nightly schedule with custom step names — synced to the cloud.</p></div>
+      <div class="feat"><span class="badge free" data-en="Free" data-zh="免费">Free</span><div class="ic">📊</div><h3 class="serif" data-en="Your score, explained" data-zh="评分，逐项详解">Your score, explained</h3><p data-en="A nightly score broken into 7 contributors — duration, efficiency, REM, deep, latency and more — each with a tap-through explainer." data-zh="每晚评分拆为 7 项构成——时长、效率、REM、深睡、入睡潜伏期等——每项都可点开详解。">A nightly score broken into 7 contributors — duration, efficiency, REM, deep, latency and more — each with a tap-through explainer.</p></div>
+      <div class="feat"><span class="badge free" data-en="Free" data-zh="免费">Free</span><div class="ic">❤️</div><h3 class="serif" data-en="Heart rate, HRV & stages" data-zh="心率、HRV 与分期">Heart rate, HRV & stages</h3><p data-en="Overnight heart-rate and HRV curves plus a full hypnogram of your sleep stages — contact-free." data-zh="整夜心率与 HRV 曲线，加上完整的睡眠分期图——全程无感。">Overnight heart-rate and HRV curves plus a full hypnogram of your sleep stages — contact-free.</p></div>
+      <div class="feat"><span class="badge free" data-en="Free" data-zh="免费">Free</span><div class="ic">🌙</div><h3 class="serif" data-en="Sleep debt & body clock" data-zh="睡眠负债与生物钟">Sleep debt & body clock</h3><p data-en="Track accumulated sleep debt and see your 24-hour body clock against your ideal window." data-zh="追踪累计睡眠负债，并以 24 小时生物钟环对照你的理想作息。">Track accumulated sleep debt and see your 24-hour body clock against your ideal window.</p></div>
+      <div class="feat"><span class="badge free" data-en="Free" data-zh="免费">Free</span><div class="ic">📅</div><h3 class="serif" data-en="Trends & calendar" data-zh="趋势与日历">Trends & calendar</h3><p data-en="7- and 30-day trends for every metric, and a monthly calendar that crowns your best nights." data-zh="每项指标的 7 / 30 天趋势，以及为最佳夜晚加冕的回顾日历。">7- and 30-day trends for every metric, and a monthly calendar that crowns your best nights.</p></div>
+      <div class="feat"><span class="badge pro" data-en="Premium" data-zh="高级">Premium</span><div class="ic">✨</div><h3 class="serif" data-en="AI autopilot & snore care" data-zh="AI 自动托管与止鼾">AI autopilot & snore care</h3><p data-en="AI tunes temperature through each stage, auto-aligns to your body clock, and logs snore/sleep-talk events with the interventions it ran." data-zh="AI 随分期自动调温、自动对齐生物钟，并记录打鼾/梦话事件及其干预动作。">AI tunes temperature through each stage, auto-aligns to your body clock, and logs snore/sleep-talk events with the interventions it ran.</p></div>
+    </div>
+
+    <!-- free vs premium plans -->
+    <div class="plans">
+      <div class="plan free reveal">
+        <h3><span data-en="Free forever" data-zh="永久免费">Free forever</span></h3>
+        <ul>
+          <li data-en="Dual-zone temperature control & editable schedules" data-zh="双区温控与可编辑日程">Dual-zone temperature control & editable schedules</li>
+          <li data-en="Sleep score with 7-factor breakdown & explainers" data-zh="睡眠评分、7 项构成拆解与详解">Sleep score with 7-factor breakdown & explainers</li>
+          <li data-en="Heart rate, HRV, stages, snoring" data-zh="心率、HRV、睡眠分期、鼾声">Heart rate, HRV, stages, snoring</li>
+          <li data-en="Sleep debt, body clock, trends & calendar" data-zh="睡眠负债、生物钟、趋势与日历">Sleep debt, body clock, trends & calendar</li>
+          <li data-en="Export your data anytime" data-zh="数据随时导出">Export your data anytime</li>
+        </ul>
+      </div>
+      <div class="plan pro reveal">
+        <h3><span data-en="Optional premium" data-zh="高级选配">Optional premium</span></h3>
+        <ul>
+          <li data-en="AI autopilot — temperature by sleep stage" data-zh="AI 自动托管——随睡眠分期调温">AI autopilot — temperature by sleep stage</li>
+          <li data-en="Automatic body-clock optimization each night" data-zh="每晚自动按生物钟优化">Automatic body-clock optimization each night</li>
+          <li data-en="Smart snore intervention + event log" data-zh="智能止鼾干预与事件记录">Smart snore intervention + event log</li>
+          <li data-en="Deep health insights & circadian coaching" data-zh="深度健康洞察与生物钟教练">Deep health insights & circadian coaching</li>
+          <li data-en="Long-term analytics — buy outright, never locked" data-zh="长期数据分析——可一次买断，绝不挟持核心功能">Long-term analytics — buy outright, never locked</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="sec" id="how" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow" data-en="How it works" data-zh="工作原理">How it works</div>
+      <h2 class="serif" data-en="From box to best sleep in minutes." data-zh="从开箱到安睡，不过几分钟。">From box to best sleep in minutes.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">1</div><h3 data-en="Zip it on" data-zh="轻覆即装">Zip it on</h3><p data-en="Fit the cover over your mattress, connect the hub, and pair Wi-Fi in the app." data-zh="床罩覆于床垫，接好主机，在 App 内完成 Wi-Fi 配网。">Fit the cover over your mattress, connect the hub, and pair Wi-Fi in the app.</p></div>
+      <div class="step reveal"><div class="num">2</div><h3 data-en="Set your temp" data-zh="设定温度">Set your temp</h3><p data-en="Pick a preset, or let auto-mode adjust through the night." data-zh="选个预设，或交由自动模式整夜调节。">Pick a preset, or let auto-mode adjust through the night.</p></div>
+      <div class="step reveal"><div class="num">3</div><h3 data-en="Sleep" data-zh="安睡">Sleep</h3><p data-en="Sensors track you contact-free while water quietly circulates." data-zh="传感器无感记录，水流静谧循环。">Sensors track you contact-free while water quietly circulates.</p></div>
+      <div class="step reveal"><div class="num">4</div><h3 data-en="Wake to insights" data-zh="晨起阅报告">Wake to insights</h3><p data-en="Your score, contributors and trends, every morning — free." data-zh="每日清晨呈上评分、构成与趋势——尽皆免费。">Your score, contributors and trends, every morning — free.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="sec cmp" id="compare">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow" data-en="How we compare" data-zh="对标对比">How we compare</div>
+      <h2 class="serif" data-en="Everything that matters — for about half." data-zh="真正紧要的，一应俱全——价格却只需其半。">Everything that matters — for about half.</h2>
+    </div>
+    <div class="reveal">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th data-en="Feature" data-zh="功能">Feature</th>
+          <th class="us">AURA</th>
+          <th class="them">Eight Sleep</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-en="Dual-zone temperature" data-zh="双区独立控温">Dual-zone temperature</td><td class="us"><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td></tr>
+        <tr><td data-en="Contact-free sleep tracking" data-zh="无感睡眠监测">Contact-free sleep tracking</td><td class="us"><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td></tr>
+        <tr><td data-en="Core features without subscription" data-zh="核心功能免订阅">Core features without subscription</td><td class="us"><span class="free" data-en="Free forever" data-zh="永久免费">Free forever</span></td><td><span class="no" data-en="Subscription" data-zh="需订阅">Subscription</span></td></tr>
+        <tr><td data-en="Body-clock thermal sync" data-zh="生物钟温控联动">Body-clock thermal sync</td><td class="us"><span class="yes">Yes</span></td><td><span class="no" data-en="Advice only" data-zh="仅建议">Advice only</span></td></tr>
+        <tr><td data-en="Every metric explained in-app" data-zh="每项指标 App 内详解">Every metric explained in-app</td><td class="us"><span class="yes">Yes</span></td><td><span class="no" data-en="Limited" data-zh="有限">Limited</span></td></tr>
+        <tr><td data-en="Snore intervention" data-zh="智能止鼾干预">Snore intervention</td><td class="us"><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td></tr>
+        <tr><td data-en="Typical price" data-zh="参考价格">Typical price</td><td class="us"><b>~$1,299</b></td><td>$2,000–$3,000+</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="cmp-tag serif reveal" data-en-html="Same science. <span class='accent'>Half the price.</span> None of the forced fees." data-zh-html="同样的科学，<span class='accent'>一半的价格，</span>从无月费。">Same science. <span class="accent">Half the price.</span> None of the forced fees.</div>
+    <p class="pricing-note" data-en="Comparison for illustration; final specs & pricing TBD." data-zh="对比仅供示意，最终参数与价格以实测为准。">Comparison for illustration; final specs & pricing TBD.</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow" data-en="Pledge tiers" data-zh="支持档位">Pledge tiers</div>
+      <h2 class="serif" data-en="Back early. Save the most." data-zh="支持愈早，优惠愈多。">Back early. Save the most.</h2>
+      <p data-en="Early birds also get 1 year of Premium AI insights free — our thank-you for backing first." data-zh="早鸟用户更获赠一年高级 AI 洞察，聊表对先行支持者的谢意。">Early birds also get 1 year of Premium AI insights free — our thank-you for backing first.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier reveal">
+        <h3 data-en="Super Early Bird" data-zh="超级早鸟">Super Early Bird</h3>
+        <div class="price serif">$899<span class="was">$1,499</span></div>
+        <div class="save" data-en="Save $600 · limited" data-zh="立省 $600 · 限量">Save $600 · limited</div>
+        <ul>
+          <li data-en="1× Cover + bedside hub" data-zh="1× 床罩 + 床头主机">1× Cover + bedside hub</li>
+          <li data-en="1 year Premium free" data-zh="1 年高级版免费">1 year Premium free</li>
+          <li data-en="Earliest ship slot" data-zh="优先发货">Earliest ship slot</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost" data-en="Claim" data-zh="预订">Claim</a>
+      </div>
+      <div class="tier best reveal">
+        <div class="pop" data-en="MOST POPULAR" data-zh="最受欢迎">MOST POPULAR</div>
+        <h3 data-en="Early Bird" data-zh="早鸟">Early Bird</h3>
+        <div class="price serif">$1,099<span class="was">$1,499</span></div>
+        <div class="save" data-en="Save $400" data-zh="立省 $400">Save $400</div>
+        <ul>
+          <li data-en="1× Cover + bedside hub" data-zh="1× 床罩 + 床头主机">1× Cover + bedside hub</li>
+          <li data-en="1 year Premium free" data-zh="1 年高级版免费">1 year Premium free</li>
+          <li data-en="Priority support" data-zh="优先客服">Priority support</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary" data-en="Back this" data-zh="立即支持">Back this</a>
+      </div>
+      <div class="tier reveal">
+        <h3 data-en="Standard" data-zh="标准档">Standard</h3>
+        <div class="price serif">$1,299<span class="was">$1,499</span></div>
+        <div class="save" data-en="Save $200" data-zh="立省 $200">Save $200</div>
+        <ul>
+          <li data-en="1× Cover + bedside hub" data-zh="1× 床罩 + 床头主机">1× Cover + bedside hub</li>
+          <li data-en="6 months Premium free" data-zh="6 个月高级版免费">6 months Premium free</li>
+          <li data-en="Standard ship slot" data-zh="标准发货">Standard ship slot</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost" data-en="Choose" data-zh="选择">Choose</a>
+      </div>
+      <div class="tier reveal">
+        <h3 data-en="Couple's Bundle" data-zh="情侣套装">Couple's Bundle</h3>
+        <div class="price serif">$1,599<span class="was">$2,998</span></div>
+        <div class="save" data-en="Best value · 2 units" data-zh="至臻之选 · 双人份">Best value · 2 units</div>
+        <ul>
+          <li data-en="Two covers + hubs" data-zh="两套床罩 + 主机">Two covers + hubs</li>
+          <li data-en="2 years Premium free" data-zh="2 年高级版免费">2 years Premium free</li>
+          <li data-en="Priority support" data-zh="优先客服">Priority support</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost" data-en="Bundle up" data-zh="选购套装">Bundle up</a>
+      </div>
+    </div>
+    <p class="pricing-note" data-en="Crowdfunding pledges shown; retail $1,499. Shipping & dates TBD; final pricing per cost model." data-zh="表中为众筹价；零售价 $1,499。运费与发货时间待定，最终定价以成本核算为准。">Crowdfunding pledges shown; retail $1,499. Shipping & dates TBD; final pricing per cost model.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow" data-en="FAQ" data-zh="常见问题">FAQ</div>
+      <h2 class="serif" data-en="Questions, answered" data-zh="你关心的问题">Questions, answered</h2>
+    </div>
+    <div class="faq reveal" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="wrap">
+    <div class="eyebrow" data-en="Join the launch" data-zh="加入首发">Join the launch</div>
+    <h2 class="serif" data-en="Reserve your half-price unit." data-zh="锁定你的半价席位。">Reserve your half-price unit.</h2>
+    <p class="muted" data-en="Join the VIP list for early-bird access and launch-day updates. No spam, ever." data-zh="加入 VIP 名单，抢先获得早鸟资格与上线提醒，绝不叨扰。">Join the VIP list for early-bird access and launch-day updates. No spam, ever.</p>
+    <form class="signup" id="signupForm">
+      <input type="email" id="email" required placeholder="you@email.com" />
+      <button type="submit" class="btn btn-primary" data-en="Get early access" data-zh="获取早鸟资格">Get early access</button>
+      <div class="ok-msg" id="okMsg" data-en="You're on the list. We'll email you before launch." data-zh="已加入名单，上线前我们将以邮件相告。">You're on the list. We'll email you before launch.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div style="max-width:32ch">
+        <div class="logo" style="font-size:18px;margin-bottom:10px">AURA</div>
+        <div class="muted" data-en="The smart cooling mattress cover. Sleep cool. Track everything. Pay once." data-zh="智能温控床罩。清凉入眠，全程记录，一次买断。">The smart cooling mattress cover. Sleep cool. Track everything. Pay once.</div>
+      </div>
+      <div class="foot-links">
+        <a href="#anatomy" data-en="Product" data-zh="产品">Product</a>
+        <a href="#app" data-en="App" data-zh="App">App</a>
+        <a href="#pricing" data-en="Pricing" data-zh="价格">Pricing</a>
+        <a href="#faq" data-en="FAQ" data-zh="常见问题">FAQ</a>
+        <a href="#" data-en="Privacy (CCPA)" data-zh="隐私 (CCPA)">Privacy (CCPA)</a>
+      </div>
+    </div>
+    <div class="disclaimer" data-en="© 2026 AURA (working name). Specs, pricing, trial & warranty are preliminary and subject to final cost model and prototype testing. Sleep tracking is for wellness and is not a medical device or diagnosis. UL/FCC certification in progress." data-zh="© 2026 AURA（暂定名）。文中参数、价格、试睡与质保均为初步信息，最终以成本核算与样机实测为准。睡眠监测用于健康管理，非医疗器械，不构成医疗诊断。UL/FCC 认证进行中。">© 2026 AURA (working name). Specs, pricing, trial & warranty are preliminary and subject to final cost model and prototype testing. Sleep tracking is for wellness and is not a medical device or diagnosis. UL/FCC certification in progress.</div>
+  </div>
+</footer>
+
+<script>
+  var faqs = [
+    {en:["Do I really never have to pay a subscription?","Correct. Temperature control and core sleep tracking — score, contributors, stages, heart rate, HRV, sleep debt, body clock, trends and calendar — are free for the life of the product. Only optional advanced AI is a paid upgrade, and even that can be bought outright."],
+     zh:["真的永远不用订阅吗？","是的。温控与核心睡眠监测——评分、构成、分期、心率、HRV、睡眠负债、生物钟、趋势与日历——在产品整个生命周期内永久免费；唯有可选的高级 AI 方需付费，且支持一次买断。"],
+     es:["¿De verdad nunca tendré que pagar una suscripción?","Así es. El control de temperatura y el seguimiento esencial del sueño —puntuación, factores, fases, frecuencia cardíaca, VFC, deuda de sueño, reloj biológico, tendencias y calendario— son gratis durante toda la vida del producto. Solo la IA avanzada es de pago, y hasta eso se puede comprar de una vez."],
+     fr:["N'aurai-je vraiment jamais d'abonnement à payer ?","Exact. Le contrôle de la température et le suivi essentiel du sommeil — score, facteurs, phases, fréquence cardiaque, VFC, dette de sommeil, horloge biologique, tendances et calendrier — sont gratuits à vie. Seule l'IA avancée est payante, et même celle-ci peut s'acheter une fois pour toutes."]},
+    {en:["Does it really act on my body clock, or just show charts?","Both. The app shows your 24-hour body-clock ring — and, with one tap (automatically on Premium), aligns tonight's pre-cool, deep-sleep dip and warm-up wake to your rhythm."],
+     zh:["它真的会根据我的生物钟调节，还是只显示图表？","两者皆有。App 会展示你的 24 小时生物钟环；只需一键（高级版可全自动），它便据此对齐今晚的预冷、深睡降温与升温唤醒。"],
+     es:["¿De verdad actúa según mi reloj biológico o solo muestra gráficos?","Ambas cosas. La app muestra tu anillo de reloj biológico de 24 horas y, con un toque (automático en Premium), alinea el preenfriado, el descenso en sueño profundo y el calentamiento de esta noche con tu ritmo."],
+     fr:["Agit-il vraiment selon mon horloge biologique, ou affiche-t-il seulement des graphiques ?","Les deux. L'app affiche votre anneau d'horloge biologique sur 24 h et, d'un seul geste (automatique avec Premium), aligne le pré-refroidissement, la baisse en sommeil profond et le réveil de cette nuit sur votre rythme."]},
+    {en:["What languages does the app support?","English and 中文 today, switchable instantly inside the app — with more on the way."],
+     zh:["App 支持哪些语言？","目前支持英文与中文，App 内一键即时切换，更多语言陆续加入。"],
+     es:["¿Qué idiomas admite la app?","Inglés y 中文 por ahora, con cambio instantáneo dentro de la app; pronto habrá más."],
+     fr:["Quelles langues l'app prend-elle en charge ?","L'anglais et le 中文 pour l'instant, avec bascule instantanée dans l'app ; d'autres arriveront."]},
+    {en:["Will it fit my mattress?","It's a cover that zips over most mattresses up to [TBD] inches deep, in standard US sizes (Full / Queen / King / Cal King)."],
+     zh:["能套我现在的床垫吗？","它是床罩，可套住厚度 ≤【待定】英寸的大多数床垫，适配美标各尺寸（Full / Queen / King / Cal King）。"],
+     es:["¿Servirá para mi colchón?","Es una funda que se ajusta sobre la mayoría de colchones de hasta [por confirmar] cm de grosor, en las medidas estándar de EE. UU. (Full / Queen / King / Cal King)."],
+     fr:["S'adaptera-t-il à mon matelas ?","C'est un surmatelas qui s'enfile sur la plupart des matelas jusqu'à [à confirmer] cm d'épaisseur, aux tailles standard américaines (Full / Queen / King / Cal King)."]},
+    {en:["How loud is it?","The bedside hub runs at ≤30 dB — quieter than a library."],
+     zh:["运行噪音大吗？","床头主机运行 ≤30 分贝，静于图书馆。"],
+     es:["¿Hace mucho ruido?","La base funciona a ≤30 dB: más silenciosa que una biblioteca."],
+     fr:["Est-il bruyant ?","La station fonctionne à ≤30 dB : plus silencieuse qu'une bibliothèque."]},
+    {en:["What about leaks?","Double-sealed water channels with leak-detection auto-shutoff."],
+     zh:["会漏水吗？","水路双重密封，一旦渗漏即时侦测、自动断电。"],
+     es:["¿Y las fugas?","Canales de agua con doble sellado y corte automático ante cualquier fuga."],
+     fr:["Et les fuites ?","Circuits d'eau à double étanchéité, avec coupure automatique en cas de fuite."]},
+    {en:["Is my data private?","CCPA-compliant. You can export or delete your data anytime, right from the app; physiological data is anonymized."],
+     zh:["我的数据安全吗？","符合 CCPA 规范，数据可在 App 内随时导出或删除，生理数据全程脱敏。"],
+     es:["¿Mis datos están protegidos?","Cumple con la CCPA. Puedes exportar o eliminar tus datos cuando quieras, desde la propia app; los datos fisiológicos se anonimizan."],
+     fr:["Mes données sont-elles protégées ?","Conforme à la CCPA. Vous pouvez exporter ou supprimer vos données à tout moment, directement dans l'app ; les données physiologiques sont anonymisées."]},
+    {en:["What's the warranty & trial?","A [TBD]-night home trial and a [TBD]-year warranty."],
+     zh:["有试睡和保修吗？","提供【待定】晚家庭试睡，及【待定】年质保。"],
+     es:["¿Hay prueba y garantía?","Una prueba en casa de [por confirmar] noches y [por confirmar] años de garantía."],
+     fr:["Y a-t-il un essai et une garantie ?","Un essai à domicile de [à confirmer] nuits et une garantie de [à confirmer] ans."]},
+    {en:["Which countries do you ship to?","US first at launch; additional regions [TBD]."],
+     zh:["发往哪些国家和地区？","首发面向美国，其他地区【待定】。"],
+     es:["¿A qué países enviáis?","Primero a EE. UU.; otras regiones [por confirmar]."],
+     fr:["Vers quels pays livrez-vous ?","Les États-Unis d'abord ; autres régions [à confirmer]."]}
+  ];
+
+  var lang = 'en';
+
+  function renderFaq(){
+    var list = document.getElementById('faqList');
+    list.innerHTML = '';
+    faqs.forEach(function(f){
+      var t = f[lang] || f.en;
+      var div = document.createElement('div');
+      div.className = 'qa';
+      div.innerHTML = '<button><span>'+t[0]+'</span><span class="chev">+</span></button><div class="ans"><p>'+t[1]+'</p></div>';
+      div.querySelector('button').addEventListener('click', function(){ div.classList.toggle('open'); });
+      list.appendChild(div);
+    });
+  }
+
+  // Spanish & French copy, keyed by the English source text. New strings fall back to EN if absent.
+  var TR = {
+    es: {
+      "The product":"El producto","The app":"La app","How it works":"Cómo funciona","vs Eight Sleep":"vs Eight Sleep","Pricing":"Precios","FAQ":"Preguntas","Reserve":"Reservar",
+      "Smart cooling mattress cover":"Funda de colchón con control térmico",
+      "A cover that zips onto your mattress and actively cools or warms each side — 55°F to 110°F — while tracking your sleep score, stages, heart rate and body clock without touching you. Core features free for life.":"Una funda que se ajusta a tu colchón y enfría o calienta cada lado —de 13 a 43 °C— mientras registra tu puntuación, fases, frecuencia cardíaca y reloj biológico sin tocarte. Funciones esenciales gratis de por vida.",
+      "Reserve — save up to $600":"Resérvala — ahorra hasta $600","See the app":"Ver la app",
+      "Dual-zone 55–110°F":"Doble zona 13–43 °C","Body-clock thermal sync":"Sincronía térmica con tu reloj biológico","≤30 dB whisper-quiet":"≤30 dB, silencio absoluto","No subscription, ever":"Sin suscripciones, nunca",
+      "What you get":"Qué incluye","A cover, a hub, and an app — working as one.":"Una funda, una base y una app, en perfecta sintonía.",
+      "No new mattress required. The cover zips over the one you own; the bedside hub circulates temperature-controlled water and reads your sleep; the app puts it all in your hand — in English or 中文.":"No necesitas un colchón nuevo. La funda se ajusta sobre el que ya tienes; la base hace circular agua a temperatura controlada y registra tu sueño; la app lo pone todo en tu mano, en inglés o 中文.",
+      "01 · The Cover":"01 · La funda","Zips onto any mattress":"Se ajusta a cualquier colchón",
+      "Quilted, breathable cover with independent left/right water channels. Fits standard US sizes.":"Funda acolchada y transpirable, con canales de agua independientes a izquierda y derecha. Compatible con las medidas estándar de EE. UU.",
+      "02 · The Hub":"02 · La base","Quiet bedside engine":"El motor silencioso de tu mesilla",
+      "Circulates temperature-controlled water and senses heart rate, HRV and breathing — at ≤30 dB.":"Hace circular agua a temperatura controlada y mide frecuencia cardíaca, VFC y respiración, a ≤30 dB.",
+      "03 · The App":"03 · La app","Your sleep, every morning":"Tu sueño, cada mañana",
+      "Score with a 7-factor breakdown, heart rate, HRV, sleep debt and body clock — free forever. Optional AI on top.":"Puntuación con desglose de 7 factores, frecuencia cardíaca, VFC, deuda de sueño y reloj biológico, gratis para siempre. IA opcional encima.",
+      "The problem":"El problema","Temperature is the #1 controllable factor in sleep.":"La temperatura es el factor más decisivo —y más controlable— del sueño.",
+      "Yet most of us still fight it with a thermostat, a fan, and kicking off the blanket — while the one product that truly fixes it costs a fortune and locks the best parts behind a subscription.":"Y aun así, la mayoría seguimos peleando con el termostato, un ventilador y la manta a medio quitar, mientras el único producto que de verdad lo resuelve cuesta una fortuna y reserva lo mejor tras una suscripción.",
+      "Hot, sweaty 3 a.m. wake-ups":"Despertares a las 3 a. m., con calor y sudor","Night-time thermoregulation goes out of balance.":"De noche, la termorregulación se desequilibra.",
+      "Two people, one temperature":"Dos personas, una sola temperatura","One runs hot, the other cold — same blanket, different needs.":"A uno le sobra calor y al otro le falta; una misma manta, dos necesidades.",
+      "Subscription fatigue":"Cansancio de las suscripciones","Buy the hardware, then keep paying monthly to use what you own.":"Compras el equipo y aun así pagas cada mes por usar lo que ya es tuyo.",
+      "A $2,000–$3,000 price wall":"Una barrera de $2,000–$3,000","Flagship sleep tech is priced out of reach for most.":"La alta tecnología del sueño queda fuera del alcance de casi todos.",
+      "Why you'll love it":"Por qué te enamorará","The same science, rethought around you.":"La misma ciencia, repensada en torno a ti.",
+      "True dual-zone control":"Control de doble zona real","Cool your side to a crisp 55°F while your partner stays a cozy 110°F — independently, all night.":"Refresca tu lado hasta los 13 °C mientras tu pareja disfruta de unos cálidos 43 °C; cada uno a su aire, toda la noche.",
+      "Contact-free tracking":"Seguimiento sin contacto","Heart rate, HRV, sleep stages and snoring — measured with nothing on your body.":"Frecuencia cardíaca, VFC, fases del sueño y ronquidos, medidos sin nada sobre tu cuerpo.",
+      "Temperature control and sleep tracking are free for the life of the product. AI is optional — and buyable outright.":"El control de temperatura y el seguimiento del sueño son gratis durante toda la vida del producto. La IA es opcional, y se puede comprar de una vez.",
+      "Whisper-quiet":"Silencioso como un susurro","The bedside hub runs at ≤30 dB — quieter than a library.":"La base funciona a ≤30 dB: más silenciosa que una biblioteca.",
+      "Leak-safe by design":"Diseño a prueba de fugas","Double-sealed water channels with leak-detection auto-shutoff.":"Canales de agua con doble sellado y corte automático ante cualquier fuga.",
+      "The app reads your circadian rhythm and auto-aligns tonight's cooling and warm-up to it — only on a cover that can act.":"La app lee tu ritmo circadiano y alinea automáticamente el enfriado y el calentamiento de esta noche; solo posible en una funda que puede actuar.",
+      "The difference":"La diferencia",
+      "The app shows your 24-hour body clock — whether you're drifting earlier or later than your ideal window. Then, with one tap (or automatically on Premium), it aligns tonight's pre-cool, deep-sleep dip and gradual warm-up wake to your rhythm.":"La app muestra tu reloj biológico de 24 horas: si te adelantas o te retrasas respecto a tu franja ideal. Luego, con un toque (o automáticamente en Premium), alinea el preenfriado, el descenso en sueño profundo y el calentamiento gradual de esta noche con tu ritmo.",
+      "Advice you can actually sleep on — because the cover, not just the chart, does something about it.":"Consejos sobre los que de verdad puedes dormir, porque actúa la funda, no solo el gráfico.",
+      "Inside the app":"Dentro de la app","A full sleep lab in your pocket — most of it free.":"Un laboratorio del sueño en tu bolsillo, y casi todo gratis.",
+      "Not a teaser screen. Real temperature control, a deeply broken-down sleep report, trends, a calendar, and a body clock that drives the cover.":"Nada de pantallas de muestra. Control de temperatura real, un informe del sueño detallado, tendencias, un calendario y un reloj biológico que gobierna la funda.",
+      "Sleep — score, 7 contributors, debt, body clock":"Sueño: puntuación, 7 factores, deuda, reloj biológico","Climate — dual dials, presets, editable schedule":"Clima: dos diales, ajustes rápidos, horario editable",
+      "Free":"Gratis","Premium":"Premium",
+      "Dual-zone control & schedules":"Control de doble zona y horarios","Per-side dials, one-tap presets, and a fully editable nightly schedule with custom step names — synced to the cloud.":"Diales por lado, ajustes con un toque y un horario nocturno totalmente editable con nombres propios, sincronizado en la nube.",
+      "Your score, explained":"Tu puntuación, explicada","A nightly score broken into 7 contributors — duration, efficiency, REM, deep, latency and more — each with a tap-through explainer.":"Una puntuación cada noche desglosada en 7 factores —duración, eficiencia, REM, profundo, latencia y más—, cada uno con su explicación.",
+      "Heart rate, HRV & stages":"Frecuencia cardíaca, VFC y fases","Overnight heart-rate and HRV curves plus a full hypnogram of your sleep stages — contact-free.":"Curvas nocturnas de frecuencia cardíaca y VFC, más un hipnograma completo de tus fases, sin contacto.",
+      "Sleep debt & body clock":"Deuda de sueño y reloj biológico","Track accumulated sleep debt and see your 24-hour body clock against your ideal window.":"Controla la deuda de sueño acumulada y compara tu reloj biológico de 24 h con tu franja ideal.",
+      "Trends & calendar":"Tendencias y calendario","7- and 30-day trends for every metric, and a monthly calendar that crowns your best nights.":"Tendencias de 7 y 30 días para cada métrica, y un calendario mensual que corona tus mejores noches.",
+      "AI autopilot & snore care":"Piloto IA y antirronquidos","AI tunes temperature through each stage, auto-aligns to your body clock, and logs snore/sleep-talk events with the interventions it ran.":"La IA ajusta la temperatura en cada fase, se alinea con tu reloj biológico y registra ronquidos y somniloquia junto con las intervenciones aplicadas.",
+      "Free forever":"Gratis para siempre","Optional premium":"Premium opcional",
+      "Dual-zone temperature control & editable schedules":"Control de temperatura por zonas y horarios editables","Sleep score with 7-factor breakdown & explainers":"Puntuación con desglose de 7 factores y explicaciones","Heart rate, HRV, stages, snoring":"Frecuencia cardíaca, VFC, fases y ronquidos","Sleep debt, body clock, trends & calendar":"Deuda de sueño, reloj biológico, tendencias y calendario","Export your data anytime":"Exporta tus datos cuando quieras",
+      "AI autopilot — temperature by sleep stage":"Piloto IA: temperatura por fase del sueño","Automatic body-clock optimization each night":"Optimización automática según tu reloj biológico cada noche","Smart snore intervention + event log":"Intervención antirronquidos y registro de eventos","Deep health insights & circadian coaching":"Análisis de salud y guía circadiana","Long-term analytics — buy outright, never locked":"Analítica a largo plazo: se compra de una vez, sin bloqueos",
+      "From box to best sleep in minutes.":"De la caja al mejor sueño en minutos.","Zip it on":"Colócala","Fit the cover over your mattress, connect the hub, and pair Wi-Fi in the app.":"Ajusta la funda sobre tu colchón, conecta la base y empareja el Wi-Fi desde la app.",
+      "Set your temp":"Elige la temperatura","Pick a preset, or let auto-mode adjust through the night.":"Elige un ajuste o deja que el modo automático lo regule toda la noche.",
+      "Sleep":"Duerme","Sensors track you contact-free while water quietly circulates.":"Los sensores te registran sin contacto mientras el agua circula en silencio.",
+      "Wake to insights":"Despierta con datos","Your score, contributors and trends, every morning — free.":"Tu puntuación, sus factores y tus tendencias, cada mañana. Gratis.",
+      "How we compare":"Cómo nos comparamos","Everything that matters — for about half.":"Todo lo que importa, por casi la mitad.",
+      "Feature":"Característica","Dual-zone temperature":"Temperatura de doble zona","Contact-free sleep tracking":"Seguimiento del sueño sin contacto","Core features without subscription":"Funciones esenciales sin suscripción",
+      "Subscription":"Con suscripción","Advice only":"Solo consejos","Every metric explained in-app":"Cada métrica explicada en la app","Limited":"Limitado","Snore intervention":"Intervención antirronquidos","Typical price":"Precio habitual",
+      "Comparison for illustration; final specs & pricing TBD.":"Comparativa orientativa; especificaciones y precio definitivos por confirmar.",
+      "Pledge tiers":"Niveles de aportación","Back early. Save the most.":"Apoya antes. Ahorra más.","Early birds also get 1 year of Premium AI insights free — our thank-you for backing first.":"Quienes reserven primero reciben además un año de IA Premium gratis, como agradecimiento por su apoyo temprano.",
+      "Super Early Bird":"Súper Early Bird","Save $600 · limited":"Ahorra $600 · limitado","1× Cover + bedside hub":"1× Funda + base","1 year Premium free":"1 año de Premium gratis","Earliest ship slot":"Envío prioritario","Claim":"Reservar",
+      "MOST POPULAR":"MÁS POPULAR","Early Bird":"Early Bird","Save $400":"Ahorra $400","Priority support":"Soporte prioritario","Back this":"Apoyar",
+      "Standard":"Estándar","Save $200":"Ahorra $200","6 months Premium free":"6 meses de Premium gratis","Standard ship slot":"Envío estándar","Choose":"Elegir",
+      "Couple's Bundle":"Pack para dos","Best value · 2 units":"La mejor opción · 2 unidades","Two covers + hubs":"Dos fundas + bases","2 years Premium free":"2 años de Premium gratis","Bundle up":"Elegir pack",
+      "Crowdfunding pledges shown; retail $1,499. Shipping & dates TBD; final pricing per cost model.":"Precios de crowdfunding; precio de venta $1,499. Envío y fechas por confirmar; precio final según el modelo de costes.",
+      "Questions, answered":"Tus dudas, resueltas",
+      "Join the launch":"Súmate al lanzamiento","Reserve your half-price unit.":"Reserva tu unidad a mitad de precio.","Join the VIP list for early-bird access and launch-day updates. No spam, ever.":"Únete a la lista VIP y accede antes que nadie, con avisos el día del lanzamiento. Sin spam, nunca.",
+      "Get early access":"Acceso anticipado","You're on the list. We'll email you before launch.":"Ya estás en la lista. Te escribiremos antes del lanzamiento.",
+      "Product":"Producto","App":"App","Privacy (CCPA)":"Privacidad (CCPA)","The smart cooling mattress cover. Sleep cool. Track everything. Pay once.":"La funda de colchón con control térmico. Duerme fresco. Mídelo todo. Paga una sola vez.",
+      "© 2026 AURA (working name). Specs, pricing, trial & warranty are preliminary and subject to final cost model and prototype testing. Sleep tracking is for wellness and is not a medical device or diagnosis. UL/FCC certification in progress.":"© 2026 AURA (nombre provisional). Especificaciones, precios, prueba y garantía son preliminares y están sujetos al modelo de costes final y a las pruebas de prototipo. El seguimiento del sueño tiene fines de bienestar; no es un dispositivo médico ni un diagnóstico. Certificación UL/FCC en curso."
+    },
+    fr: {
+      "The product":"Le produit","The app":"L'application","How it works":"Fonctionnement","vs Eight Sleep":"vs Eight Sleep","Pricing":"Tarifs","FAQ":"FAQ","Reserve":"Réserver",
+      "Smart cooling mattress cover":"Surmatelas connecté à régulation thermique",
+      "A cover that zips onto your mattress and actively cools or warms each side — 55°F to 110°F — while tracking your sleep score, stages, heart rate and body clock without touching you. Core features free for life.":"Un surmatelas qui s'enfile sur votre matelas et rafraîchit ou réchauffe activement chaque côté —de 13 à 43 °C— tout en suivant votre score, vos phases, votre fréquence cardiaque et votre horloge biologique sans rien sur vous. Fonctions essentielles gratuites à vie.",
+      "Reserve — save up to $600":"Réservez — jusqu'à 600 $ d'économie","See the app":"Voir l'app",
+      "Dual-zone 55–110°F":"Double zone 13–43 °C","Body-clock thermal sync":"Synchronisation thermique avec votre horloge biologique","≤30 dB whisper-quiet":"≤30 dB, silence absolu","No subscription, ever":"Sans abonnement, jamais",
+      "What you get":"Ce que vous recevez","A cover, a hub, and an app — working as one.":"Un surmatelas, une station et une app, en parfaite harmonie.",
+      "No new mattress required. The cover zips over the one you own; the bedside hub circulates temperature-controlled water and reads your sleep; the app puts it all in your hand — in English or 中文.":"Pas besoin de changer de matelas. Le surmatelas s'enfile sur le vôtre ; la station fait circuler une eau à température régulée et analyse votre sommeil ; l'app met le tout au creux de votre main, en anglais ou en 中文.",
+      "01 · The Cover":"01 · Le surmatelas","Zips onto any mattress":"S'adapte à tout matelas",
+      "Quilted, breathable cover with independent left/right water channels. Fits standard US sizes.":"Surmatelas matelassé et respirant, avec des circuits d'eau indépendants à gauche et à droite. Compatible avec les tailles standard américaines.",
+      "02 · The Hub":"02 · La station","Quiet bedside engine":"Le moteur silencieux de votre chevet",
+      "Circulates temperature-controlled water and senses heart rate, HRV and breathing — at ≤30 dB.":"Fait circuler une eau à température régulée et mesure fréquence cardiaque, VFC et respiration, à ≤30 dB.",
+      "03 · The App":"03 · L'application","Your sleep, every morning":"Votre sommeil, chaque matin",
+      "Score with a 7-factor breakdown, heart rate, HRV, sleep debt and body clock — free forever. Optional AI on top.":"Score détaillé en 7 facteurs, fréquence cardiaque, VFC, dette de sommeil et horloge biologique, gratuits à vie. IA en option par-dessus.",
+      "The problem":"Le problème","Temperature is the #1 controllable factor in sleep.":"La température est le facteur le plus déterminant —et le plus maîtrisable— du sommeil.",
+      "Yet most of us still fight it with a thermostat, a fan, and kicking off the blanket — while the one product that truly fixes it costs a fortune and locks the best parts behind a subscription.":"Pourtant, la plupart d'entre nous luttons encore avec le thermostat, un ventilateur et la couette repoussée, alors que le seul produit qui règle vraiment le problème coûte une fortune et réserve le meilleur derrière un abonnement.",
+      "Hot, sweaty 3 a.m. wake-ups":"Réveils en sueur à 3 h du matin","Night-time thermoregulation goes out of balance.":"La nuit, la thermorégulation se dérègle.",
+      "Two people, one temperature":"Deux personnes, une seule température","One runs hot, the other cold — same blanket, different needs.":"L'un a trop chaud, l'autre trop froid : une même couette, deux besoins.",
+      "Subscription fatigue":"La lassitude des abonnements","Buy the hardware, then keep paying monthly to use what you own.":"Vous achetez l'appareil, puis payez chaque mois pour utiliser ce qui vous appartient déjà.",
+      "A $2,000–$3,000 price wall":"Un mur tarifaire de 2 000 à 3 000 $","Flagship sleep tech is priced out of reach for most.":"La technologie du sommeil haut de gamme reste hors de portée du plus grand nombre.",
+      "Why you'll love it":"Pourquoi vous allez l'adorer","The same science, rethought around you.":"La même science, repensée autour de vous.",
+      "True dual-zone control":"Véritable contrôle double zone","Cool your side to a crisp 55°F while your partner stays a cozy 110°F — independently, all night.":"Rafraîchissez votre côté jusqu'à 13 °C tandis que votre partenaire profite d'un doux 43 °C : chacun son réglage, toute la nuit.",
+      "Contact-free tracking":"Suivi sans contact","Heart rate, HRV, sleep stages and snoring — measured with nothing on your body.":"Fréquence cardiaque, VFC, phases de sommeil et ronflements, mesurés sans rien porter.",
+      "Temperature control and sleep tracking are free for the life of the product. AI is optional — and buyable outright.":"Le contrôle de la température et le suivi du sommeil sont gratuits pendant toute la durée de vie du produit. L'IA est en option, et peut s'acheter une fois pour toutes.",
+      "Whisper-quiet":"Silencieux comme un murmure","The bedside hub runs at ≤30 dB — quieter than a library.":"La station fonctionne à ≤30 dB : plus silencieuse qu'une bibliothèque.",
+      "Leak-safe by design":"Conçu pour ne jamais fuir","Double-sealed water channels with leak-detection auto-shutoff.":"Circuits d'eau à double étanchéité, avec coupure automatique en cas de fuite.",
+      "The app reads your circadian rhythm and auto-aligns tonight's cooling and warm-up to it — only on a cover that can act.":"L'app lit votre rythme circadien et aligne automatiquement le rafraîchissement et le réchauffement de cette nuit ; possible uniquement sur un surmatelas qui peut agir.",
+      "The difference":"La différence",
+      "The app shows your 24-hour body clock — whether you're drifting earlier or later than your ideal window. Then, with one tap (or automatically on Premium), it aligns tonight's pre-cool, deep-sleep dip and gradual warm-up wake to your rhythm.":"L'app affiche votre horloge biologique sur 24 h : en avance ou en retard sur votre fenêtre idéale. Puis, d'un seul geste (ou automatiquement avec Premium), elle aligne le pré-refroidissement, la baisse en sommeil profond et le réveil progressif de cette nuit sur votre rythme.",
+      "Advice you can actually sleep on — because the cover, not just the chart, does something about it.":"Des conseils sur lesquels vous pouvez vraiment dormir, car c'est le surmatelas qui agit, pas seulement le graphique.",
+      "Inside the app":"Dans l'application","A full sleep lab in your pocket — most of it free.":"Un véritable labo du sommeil dans votre poche, et presque tout est gratuit.",
+      "Not a teaser screen. Real temperature control, a deeply broken-down sleep report, trends, a calendar, and a body clock that drives the cover.":"Pas une simple démo. Un vrai contrôle de température, un bilan de sommeil détaillé, des tendances, un calendrier et une horloge biologique qui pilote le surmatelas.",
+      "Sleep — score, 7 contributors, debt, body clock":"Sommeil : score, 7 facteurs, dette, horloge biologique","Climate — dual dials, presets, editable schedule":"Climat : deux cadrans, préréglages, programme modifiable",
+      "Free":"Gratuit","Premium":"Premium",
+      "Dual-zone control & schedules":"Contrôle double zone et programmes","Per-side dials, one-tap presets, and a fully editable nightly schedule with custom step names — synced to the cloud.":"Cadrans par côté, préréglages en un geste et un programme nocturne entièrement modifiable avec des noms personnalisés, synchronisé dans le cloud.",
+      "Your score, explained":"Votre score, expliqué","A nightly score broken into 7 contributors — duration, efficiency, REM, deep, latency and more — each with a tap-through explainer.":"Un score chaque nuit décomposé en 7 facteurs —durée, efficacité, REM, profond, latence et plus—, chacun avec son explication.",
+      "Heart rate, HRV & stages":"Fréquence cardiaque, VFC et phases","Overnight heart-rate and HRV curves plus a full hypnogram of your sleep stages — contact-free.":"Courbes nocturnes de fréquence cardiaque et de VFC, plus un hypnogramme complet de vos phases, sans contact.",
+      "Sleep debt & body clock":"Dette de sommeil et horloge biologique","Track accumulated sleep debt and see your 24-hour body clock against your ideal window.":"Suivez la dette de sommeil accumulée et comparez votre horloge biologique sur 24 h à votre fenêtre idéale.",
+      "Trends & calendar":"Tendances et calendrier","7- and 30-day trends for every metric, and a monthly calendar that crowns your best nights.":"Tendances sur 7 et 30 jours pour chaque mesure, et un calendrier mensuel qui couronne vos meilleures nuits.",
+      "AI autopilot & snore care":"Pilote IA et anti-ronflement","AI tunes temperature through each stage, auto-aligns to your body clock, and logs snore/sleep-talk events with the interventions it ran.":"L'IA ajuste la température à chaque phase, s'aligne sur votre horloge biologique et consigne ronflements et somniloquie avec les interventions effectuées.",
+      "Free forever":"Gratuit à vie","Optional premium":"Premium en option",
+      "Dual-zone temperature control & editable schedules":"Contrôle de température par zone et programmes modifiables","Sleep score with 7-factor breakdown & explainers":"Score avec détail en 7 facteurs et explications","Heart rate, HRV, stages, snoring":"Fréquence cardiaque, VFC, phases, ronflements","Sleep debt, body clock, trends & calendar":"Dette de sommeil, horloge biologique, tendances et calendrier","Export your data anytime":"Exportez vos données à tout moment",
+      "AI autopilot — temperature by sleep stage":"Pilote IA : température selon la phase de sommeil","Automatic body-clock optimization each night":"Optimisation automatique selon votre horloge biologique chaque nuit","Smart snore intervention + event log":"Action anti-ronflement intelligente et journal d'événements","Deep health insights & circadian coaching":"Analyses santé approfondies et coaching circadien","Long-term analytics — buy outright, never locked":"Analyses à long terme : à l'achat unique, jamais bloquées",
+      "From box to best sleep in minutes.":"Du carton au meilleur sommeil en quelques minutes.","Zip it on":"Installez-le","Fit the cover over your mattress, connect the hub, and pair Wi-Fi in the app.":"Enfilez le surmatelas, branchez la station et associez le Wi-Fi depuis l'app.",
+      "Set your temp":"Réglez la température","Pick a preset, or let auto-mode adjust through the night.":"Choisissez un préréglage, ou laissez le mode auto ajuster toute la nuit.",
+      "Sleep":"Dormez","Sensors track you contact-free while water quietly circulates.":"Les capteurs vous suivent sans contact pendant que l'eau circule en silence.",
+      "Wake to insights":"Réveillez-vous informé","Your score, contributors and trends, every morning — free.":"Votre score, ses facteurs et vos tendances, chaque matin. Gratuit.",
+      "How we compare":"Le comparatif","Everything that matters — for about half.":"Tout l'essentiel, pour environ moitié prix.",
+      "Feature":"Caractéristique","Dual-zone temperature":"Température double zone","Contact-free sleep tracking":"Suivi du sommeil sans contact","Core features without subscription":"Fonctions essentielles sans abonnement",
+      "Subscription":"Sur abonnement","Advice only":"Conseils seulement","Every metric explained in-app":"Chaque mesure expliquée dans l'app","Limited":"Limité","Snore intervention":"Action anti-ronflement","Typical price":"Prix habituel",
+      "Comparison for illustration; final specs & pricing TBD.":"Comparatif indicatif ; caractéristiques et prix définitifs à confirmer.",
+      "Pledge tiers":"Niveaux de contribution","Back early. Save the most.":"Soutenez tôt. Économisez plus.","Early birds also get 1 year of Premium AI insights free — our thank-you for backing first.":"Les premiers contributeurs reçoivent en plus un an d'analyses IA Premium offert, pour vous remercier de votre soutien.",
+      "Super Early Bird":"Super Early Bird","Save $600 · limited":"600 $ d'économie · en quantité limitée","1× Cover + bedside hub":"1× surmatelas + station","1 year Premium free":"1 an de Premium offert","Earliest ship slot":"Expédition prioritaire","Claim":"Réserver",
+      "MOST POPULAR":"LE PLUS CHOISI","Early Bird":"Early Bird","Save $400":"400 $ d'économie","Priority support":"Assistance prioritaire","Back this":"Soutenir",
+      "Standard":"Standard","Save $200":"200 $ d'économie","6 months Premium free":"6 mois de Premium offerts","Standard ship slot":"Expédition standard","Choose":"Choisir",
+      "Couple's Bundle":"Pack duo","Best value · 2 units":"Le meilleur choix · 2 unités","Two covers + hubs":"Deux surmatelas + stations","2 years Premium free":"2 ans de Premium offerts","Bundle up":"Choisir le pack",
+      "Crowdfunding pledges shown; retail $1,499. Shipping & dates TBD; final pricing per cost model.":"Tarifs de financement participatif ; prix public 1 499 $. Livraison et dates à confirmer ; prix final selon le modèle de coûts.",
+      "Questions, answered":"Vos questions, nos réponses",
+      "Join the launch":"Rejoignez le lancement","Reserve your half-price unit.":"Réservez votre exemplaire à moitié prix.","Join the VIP list for early-bird access and launch-day updates. No spam, ever.":"Rejoignez la liste VIP pour un accès anticipé et les actualités du jour J. Jamais de spam.",
+      "Get early access":"Accès anticipé","You're on the list. We'll email you before launch.":"Vous êtes inscrit. Nous vous écrirons avant le lancement.",
+      "Product":"Produit","App":"App","Privacy (CCPA)":"Confidentialité (CCPA)","The smart cooling mattress cover. Sleep cool. Track everything. Pay once.":"Le surmatelas connecté à régulation thermique. Dormez au frais. Mesurez tout. Payez une seule fois.",
+      "© 2026 AURA (working name). Specs, pricing, trial & warranty are preliminary and subject to final cost model and prototype testing. Sleep tracking is for wellness and is not a medical device or diagnosis. UL/FCC certification in progress.":"© 2026 AURA (nom provisoire). Caractéristiques, prix, essai et garantie sont préliminaires et sujets au modèle de coûts final et aux tests de prototype. Le suivi du sommeil vise le bien-être ; ce n'est pas un dispositif médical ni un diagnostic. Certification UL/FCC en cours."
+    }
+  };
+  var TRH = {
+    es: {
+      "Flagship sleep. <em>Half the price.</em> No monthly fee, ever.":"Sueño de primera. <em>A mitad de precio.</em> Sin cuotas mensuales, nunca.",
+      "Crowdfunding from <b>$899</b> · ships in standard US sizes · 30 dB quiet":"Crowdfunding desde <b>$899</b> · medidas estándar de EE. UU. · 30 dB de silencio",
+      "Most trackers advise. <em>A cover can act.</em>":"La mayoría solo aconseja. <em>Una funda puede actuar.</em>",
+      "Same science. <span class='accent'>Half the price.</span> None of the forced fees.":"La misma ciencia. <span class='accent'>La mitad de precio.</span> Sin cuotas obligatorias."
+    },
+    fr: {
+      "Flagship sleep. <em>Half the price.</em> No monthly fee, ever.":"Un sommeil d'exception. <em>À moitié prix.</em> Sans abonnement, jamais.",
+      "Crowdfunding from <b>$899</b> · ships in standard US sizes · 30 dB quiet":"Financement participatif dès <b>899 $</b> · tailles standard américaines · 30 dB de silence",
+      "Most trackers advise. <em>A cover can act.</em>":"La plupart se contentent de conseiller. <em>Un surmatelas peut agir.</em>",
+      "Same science. <span class='accent'>Half the price.</span> None of the forced fees.":"La même science. <span class='accent'>Moitié prix.</span> Aucun frais imposé."
+    }
+  };
+
+  function setLang(l){
+    lang = l;
+    document.documentElement.lang = ({en:'en',zh:'zh-CN',es:'es',fr:'fr'})[l] || 'en';
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var en = el.getAttribute('data-en'), v;
+      if(l === 'en') v = en;
+      else if(l === 'zh') v = el.getAttribute('data-zh');
+      else v = (TR[l] && TR[l][en]) || en;
+      if(v != null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      var en = el.getAttribute('data-en-html'), v;
+      if(l === 'en') v = en;
+      else if(l === 'zh') v = el.getAttribute('data-zh-html');
+      else v = (TRH[l] && TRH[l][en]) || en;
+      if(v != null) el.innerHTML = v;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('#langSw button'), function(b){
+      b.classList.toggle('on', b.getAttribute('data-l') === l);
+    });
+    renderFaq();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('#langSw button'), function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-l')); });
+  });
+
+  document.getElementById('signupForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(document.getElementById('email').value.trim()){
+      document.getElementById('okMsg').style.display = 'block';
+      document.getElementById('email').value = '';
+      // TODO: POST to your email provider / Supabase here.
+    }
+  });
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  setLang('zh');
+</script>
+</body>
+</html>
